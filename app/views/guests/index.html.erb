@@ -1,0 +1,62 @@
+<div class="col-md-9 form-guest">
+<%= render 'form', {btn_label: 'Add Guest'} %>
+</div>
+<div class="col-md-3 search-form">
+  <%= form_tag(guests_path, method: "get", id: "form-group") do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= button_tag do %>
+      <span class="glyphicon glyphicon-search search"></span>
+    <% end %>
+  <% end %>
+</div><br><br>
+
+<h1 class="title">Guest's List</h1>
+<h1 class="col-md-6 title">Total Guests: <%= Guest.total_guests %></h1>
+<h1 class="col-md-6 title">Confirmed Guests: <%=@guests.confirmed_guests.count%></h1>
+
+<table class="table">
+  <tr class="table-header">
+    <td class="names"><h3>Guest Name</h3></td>
+    <td><h3>Guest Confirmation</h3></td>
+    <td><h3>Manage Guest</h3></td>
+  </tr>
+  <% @guests.each do |g|%>
+    <tr>
+      <td class="names"><%=g.full_name%></td>
+      <td>
+        <% if g.rsvp == false %>
+          <div class="form-inline">
+            <%= form_for g do |f| %>
+              <div class="form-group">
+                <%= f.check_box :rsvp%>
+                <%= f.label 'RSVP'%>
+              </div>
+              <%= f.submit "Confirm Guest" %>
+            <% end %>
+          </div>
+        <%else%>
+          <span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;"></span>
+        <%end%>
+      </td>
+      <td>
+        <%= link_to edit_guest_path(g) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+        <%= link_to guest_path(g), method: :delete do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <%end%>
+      <td>
+    </tr>
+  <%end%>
+</table>
+<div>
+  <% if params[:search].present? %>
+    <% if @guests.present?%>
+      <% @guests %>
+      <a href="/guests">Guests' List</a>
+      <%else%>
+        <p>There is no Guest containing the term(s) <%= params[:search] %>.</p>
+        <a href="/guests">Guests' List</a>
+      <%end%>
+  <% end %>
+</div>

@@ -1,0 +1,22 @@
+<%= @guest.errors.messages.values.join(", ")%>
+<div class="form-inline">
+  <%= form_for  @guest do |g| %>
+    <div class="form-group">
+      <%=g.label "Guest's First Name" %>
+      <%=g.text_field :first_name %>&nbsp;&nbsp;
+    </div>
+    <div class="form-group">
+      <%=g.label "Guest's Last Name" %>
+      <%=g.text_field :last_name %>&nbsp;&nbsp;
+    </div>
+    <div class="form-group">
+      <%= g.check_box :rsvp%>
+      <%= g.label 'RSVP'%>&nbsp;&nbsp;
+    </div>
+    <div class="form-group">
+      <%= g.check_box :plus_one%>
+      <%= g.label 'Plus one?'%>&nbsp;&nbsp;
+    </div>
+  <%= g.submit btn_label%>
+  <% end %>
+</div>
