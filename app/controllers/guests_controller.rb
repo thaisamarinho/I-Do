@@ -1,10 +1,9 @@
 class GuestsController < ApplicationController
+  before_action :find_guest, only:[:edit, :update, :destroy]
   def index
     @guest = Guest.new
     @guests = Guest.order(:first_name)
-    if params[:search]
-      @guests = Guest.search(params[:search]).order(:first_name)
-    end
+    @guests = Guest.search(params[:search]).order(:first_name) if params[:search]
   end
 
   def new
@@ -22,23 +21,23 @@ class GuestsController < ApplicationController
 
 
   def edit
-    @guest = Guest.find params[:id]
     render :index
   end
 
   def update
-    @guest = Guest.find params[:id]
     @guest.update guest_params
     redirect_to guests_path
   end
 
   def destroy
-    @guest = Guest.find params[:id]
     @guest.destroy
     redirect_to guests_path
   end
 
   private
+  def find_guest
+    @guest = Guest.find params[:id]
+  end
 
   def guest_params
     params.require(:guest).permit(:first_name, :last_name, :rsvp, :plus_one)
