@@ -2,6 +2,9 @@ class GuestsController < ApplicationController
   def index
     @guest = Guest.new
     @guests = Guest.order(:first_name)
+    if params[:search]
+      @guests = Guest.search(params[:search]).order(:first_name)
+    end
   end
 
   def new

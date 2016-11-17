@@ -8,6 +8,10 @@ class Guest < ApplicationRecord
     all.count
   end
 
+  def self.search(search)
+    where("first_name ILIKE ? OR last_name ILIKE ?", "%#{search}%", "%#{search}%")
+  end
+
 
   def full_name
     first_name + " " + last_name
