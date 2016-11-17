@@ -1,0 +1,23 @@
+<%= @service.errors.messages.values.join(", ")%>
+<div class="form-inline">
+  <%= form_for @service do |s| %>
+    <div class="form-group">
+      <%=s.label "Vendor" %>
+      <%=s.text_field :vendor %>&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="form-group">
+      <%=s.label "Vendor Price $" %>
+      <%=s.text_field :price %>&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="form-group">
+      <%=s.label "Budget $" %>
+      <%=s.text_field :budget %>&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="form-group">
+      <%= s.check_box :chosen%>
+      <%= s.label 'Hired!'%>&nbsp;&nbsp;&nbsp;
+    </div>
+
+  <%= s.submit btn_label %>
+  <% end %>
+</div>

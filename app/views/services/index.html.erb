@@ -1,0 +1,38 @@
+<div>
+<%= render 'form', {btn_label: 'Add Service'} %>
+</div><br>
+
+<h1 class="col-md-6">Service's List</h1>
+<h1 class="col-md-6">Total Cost: <%= Service.total_price%></h1>
+
+<table class="table">
+  <tr>
+    <td class="name"><h3>Category</h3></td>
+    <td><h3>Bugdet($)</h3></td>
+    <td><h3>Vendor</h3></td>
+    <td><h3>Vendor Price($)</h3></td>
+    <td><h3>Status</h3></td>
+    <td><h3>Manage Service</h3></td>
+  </tr>
+  <% @services.each do |t|%>
+    <tr>
+      <td></td>
+      <td><%=t.budget%></td>
+      <td><%=t.vendor%></td>
+      <td><%=t.price%></td>
+      <%if t.status >= 0 %>
+        <td style="color:green"><%=t.status%></td>
+      <%else%>
+        <td style="color:red"><%=t.status%></td>
+      <%end%>
+      <td>
+        <%= link_to edit_service_path(t) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+        <%= link_to service_path(t), method: :delete do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <%end%>
+      <td>
+    </tr>
+  <%end%>
+</table>
