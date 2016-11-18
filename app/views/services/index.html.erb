@@ -2,8 +2,9 @@
 <%= render 'form', {btn_label: 'Add Service'} %>
 </div><br>
 
-<h1 class="col-md-6">Service's List</h1>
-<h1 class="col-md-6">Total Cost: <%= Service.total_price%></h1>
+<h1>Service's List</h1>
+<h1 class="col-md-6">Total Budget($): ?????<%#= couple.budget%></h1>
+<h1 class="col-md-6">Total Cost($): <%= Service.total_price%></h1>
 
 <table class="table">
   <tr>
@@ -16,7 +17,12 @@
   </tr>
   <% @services.each do |t|%>
     <tr>
-      <td></td>
+      <td>
+        <% t.tags.sort.each do |tag| %>
+          <%=link_to "#{tag.name}", tag_path(tag.id)%>
+          <%= " | " if (tag != t.tags.last)%>
+        <%end%>
+      </td>
       <td><%=t.budget%></td>
       <td><%=t.vendor%></td>
       <td><%=t.price%></td>

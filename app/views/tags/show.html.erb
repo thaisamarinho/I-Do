@@ -1,0 +1,26 @@
+<h1 class="name"><%= @tag.name %></h1><br>
+
+<% @taggings.map do |t| %>
+
+<table class="table">
+  <tr class="table-header">
+    <td>Vendor</td>
+    <td>Vendor Price</td>
+    <td>Budget</td>
+    <td>Status</td>
+    <td>Hired</td>
+  </tr>
+  <tr>
+    <td><%= t.service.vendor %></td>
+    <td><%= t.service.price %></td>
+    <td><%= t.service.budget %></td>
+      <%if t.service.status >= 0 %>
+        <td style="color:green"><%=t.service.status%></td>
+      <%else%>
+        <td style="color:red"><%=t.service.status%></td>
+      <%end%>
+    <td><%= t.service.chosen %></td>
+  </tr>
+</table>
+
+<%end%>

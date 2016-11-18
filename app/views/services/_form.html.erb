@@ -2,6 +2,13 @@
 <div class="form-inline">
   <%= form_for @service do |s| %>
     <div class="form-group">
+      <%=s.label "Category" %>
+      <%= s.collection_select(
+      :tag_ids, Tag.all, :id, :name, {},
+      { multiple: true, class: 'chosen-select'}
+      ) %>
+    </div>&nbsp;&nbsp;
+    <div class="form-group">
       <%=s.label "Vendor" %>
       <%=s.text_field :vendor %>&nbsp;&nbsp;&nbsp;
     </div>
