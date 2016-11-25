@@ -1,8 +1,23 @@
 <h1 class="name"><%= @tag.name %></h1><br>
 
+<% i = 4 %>
 <% @taggings.map do |t| %>
 
-<table class="table">
+<div class="col-md-<%= i %> tag-index">
+  <p>Vendor:<strong> <%= t.service.vendor %></strong></p>
+  <p>Price($): <%= t.service.price %></p>
+  <p>Budget($): <%= t.service.budget %></p>
+  <p><%if t.service.status >= 0 %>
+    Status: <i style="color:green"><%=t.service.status%></i>
+  <%else%>
+    Status: <i style="color:red"><%=t.service.status%></i>
+  <%end%>
+</p>
+  <p>Hired: <%= t.service.chosen %></p>
+</div>
+
+
+<!-- <table class="table">
   <tr class="table-header">
     <td>Vendor</td>
     <td>Vendor Price</td>
@@ -11,16 +26,16 @@
     <td>Hired</td>
   </tr>
   <tr>
-    <td><%= t.service.vendor %></td>
-    <td><%= t.service.price %></td>
-    <td><%= t.service.budget %></td>
-      <%if t.service.status >= 0 %>
-        <td style="color:green"><%=t.service.status%></td>
-      <%else%>
-        <td style="color:red"><%=t.service.status%></td>
-      <%end%>
-    <td><%= t.service.chosen %></td>
+    <td><%#= t.service.vendor %></td>
+    <td><%#= t.service.price %></td>
+    <td><%#= t.service.budget %></td>
+      <%#if t.service.status >= 0 %>
+        <td style="color:green"><%#=t.service.status%></td>
+      <%#else%>
+        <td style="color:red"><%#=t.service.status%></td>
+      <%#end%>
+    <td><%#= t.service.chosen %></td>
   </tr>
-</table>
+</table> -->
 
 <%end%>

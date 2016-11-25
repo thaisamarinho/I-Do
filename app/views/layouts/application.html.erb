@@ -6,8 +6,10 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'application',
+    <%#= stylesheet_link_tag    'application',
       "https://fonts.googleapis.com/css?family=Dancing+Script", media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= stylesheet_link_tag    'application', href="https://fonts.googleapis.com/css?family=Raleway", media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -27,23 +29,32 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <%# if user_signed_in?%>
+            <% if user_signed_in?%>
                 <li>
-                  <p class="navbar-text">Hello <%#=current_user.first_name%></p>
+                  <p class="navbar-text">Hello <%=current_user.first_name%></p>
                 </li>
-                <li><%#= button_to 'Sign Out', sessions_path, method: :delete, class: 'btn btn-default navbar-btn' %></li>
-            <%# else %>
-              <li><%#= link_to 'Sign up with email', new_user_path %></li>
-              <li><%#= link_to 'Sign in', new_session_path %></li>
-              <li><%#= link_to 'Sign in with twitter', sign_in_with_twitter_path %></li>
-            <%#end%>
+                <li><%= button_to 'Sign Out', sessions_path, method: :delete, class: 'btn btn-default navbar-btn' %></li>
+            <% else %>
+              <li><%= link_to 'Sign up', new_user_path %></li>
+              <li><%= link_to 'Sign in', new_session_path %></li>
+              <!-- <li><%#= link_to 'Sign in with twitter', sign_in_with_twitter_path %></li> -->
+            <%end%>
           </ul>
         </div>
       </div>
     </nav>
     <div class="background container-fluid">
-      <%= notice || alert %>
-      <%= yield %>
+      <% if notice || alert %>
+        <div class="alert alert-<%= notice ? 'success' : 'danger'%> alert-dismissable" role="alert">
+          <%= notice || alert %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+      <div class="container-fluid">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
