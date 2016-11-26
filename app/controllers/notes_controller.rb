@@ -1,8 +1,8 @@
 class NotesController < ApplicationController
+  before_action :find_note, only: [:update, :destroy]
 
   def create
     @service = Service.find(params[:service_id])
-    note_params = params.require(:note).permit(:body)
     @note = Note.new note_params
     @note.service = @service
     @note.user = current_user
@@ -17,8 +17,12 @@ class NotesController < ApplicationController
     end
   end
 
+  def update
+    @note.update_attributes(note_params)
+    redirect_to :back
+  end
+
   def destroy
-    @note = Note.find params[:id]
     respond_to do |format|
       if @note.destroy
         format.html { redirect_to :back, notice: 'Note deleted!' }
@@ -28,6 +32,16 @@ class NotesController < ApplicationController
         format.js { render js: 'alert("access denied!")' }
       end
     end
+  end
+
+  private
+
+  def note_params
+    params.require(:note).permit(:body)
+  end
+
+  def find_note
+    @note = Note.find params[:id]
   end
 
 
