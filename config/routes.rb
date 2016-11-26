@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
 
   resources :guests
-  resources :services
+  resources :services do
+    resources :notes
+  end
   resources :tags
 end
