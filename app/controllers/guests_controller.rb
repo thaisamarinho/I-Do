@@ -1,18 +1,14 @@
 class GuestsController < ApplicationController
-  before_action :find_guest, only:[:edit, :update, :destroy]
+  before_action :find_guest, only:[:edit, :update, :destroy, :show]
+  before_action :find_wedding, only:[:index, :create]
+  respond_to :html, :json
+
   def index
-    @wedding = Wedding.find params[:wedding_id]
     @guest = Guest.new
-    @guests = Guest.order(:first_name)
     @guests = Guest.search(params[:search]).order(:first_name) if params[:search]
   end
 
-  def new
-  end
-
   def create
-    @wedding = Wedding.find params[:wedding_id]
-    @guests = Guest.order(first_name: :asc)
     @guest = Guest.new guest_params
     @guest.wedding = @wedding
     if @guest.save
@@ -22,14 +18,13 @@ class GuestsController < ApplicationController
     end
   end
 
-
-  def edit
-    render :index
+  def show
+    redirect_to wedding_guests_path(@guest.wedding)
   end
 
   def update
-    @guest.update guest_params
-    redirect_to wedding_guests_path(@guest.wedding)
+    @guest.update_attributes(guest_params)
+    respond_with @guest
   end
 
   def destroy
@@ -39,8 +34,14 @@ class GuestsController < ApplicationController
   end
 
   private
+
   def find_guest
     @guest = Guest.find params[:id]
+  end
+
+  def find_wedding
+    @wedding = Wedding.find params[:wedding_id]
+    @guests = Guest.order(:first_name)
   end
 
   def guest_params

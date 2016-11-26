@@ -43,6 +43,9 @@ GEM
       execjs
     awesome_print (1.7.0)
     bcrypt (3.1.11)
+    best_in_place (3.1.0)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -149,6 +152,8 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    responders (2.3.0)
+      railties (>= 4.2.0, < 5.1)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -220,6 +225,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   bcrypt (~> 3.1.7)
+  best_in_place
   bootstrap-sass (~> 3.3.6)
   byebug
   cancancan
@@ -240,6 +246,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-controller-testing
+  responders
   rspec
   rspec-rails
   sass-rails (~> 5.0)

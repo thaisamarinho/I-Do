@@ -1,5 +1,5 @@
 <div class="col-md-9 form-guest">
-<%= render 'form', {btn_label: 'Add Guest'} %>
+  <%= render 'form', {btn_label: 'Add Guest'} %>
 </div>
 <div class="col-md-3 search-form">
   <%= form_tag(wedding_guests_path(@wedding), method: "get", id: "form-group") do %>
@@ -12,7 +12,9 @@
 
 <h1 class="title">Guest's List</h1>
 <h1 class="col-md-6 title">Total Guests: <%= Guest.total_guests %></h1>
-<h1 class="col-md-6 title">Confirmed Guests: <%=@guests.confirmed_guests.count%></h1>
+<h1 class="col-md-6 title">
+  Confirmed Guests: <%= @guests.confirmed_guests.count %>
+</h1>
 
 <table class="table">
   <tr class="table-header">
@@ -22,7 +24,9 @@
   </tr>
   <% @guests.each do |g|%>
     <tr>
-      <td class="names"><%=g.full_name%></td>
+      <div>
+        <td class="names"><%=best_in_place g, :first_name%> <%=best_in_place g, :last_name%></td>
+      </div>
       <td>
         <% if g.rsvp == false %>
           <div class="form-inline">
@@ -39,7 +43,7 @@
         <%end%>
       </td>
       <td>
-        <%= link_to edit_guest_path(g) do %>
+        <%= link_to  do %>
           <span class="glyphicon glyphicon-pencil"></span>
         <% end %>
         <%= link_to guest_path(g), method: :delete do %>
