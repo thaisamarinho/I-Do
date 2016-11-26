@@ -1,0 +1,4 @@
+$("#<%= dom_id(@service)%>").prepend("<%= j render 'note', note: @note %>");
+
+<% @note = Note.new %>
+$("#note-form_<%= dom_id(@service)%>").html('<%= j render 'form', service: @service %>')
