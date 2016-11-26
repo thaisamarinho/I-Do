@@ -1,7 +1,8 @@
 <div class="col-md-12" id="<%= dom_id(note)%>">
   <div class="row">
     <div>
-      <%= note.body %>
+      <p><%= note.body %></p>
+      <p class="note-footer">Last modified at: <%= note.updated_at %> by: <%= note.user.first_name %></p>
     </div>
 
     <div>

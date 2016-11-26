@@ -5,6 +5,7 @@ class NotesController < ApplicationController
     note_params = params.require(:note).permit(:body)
     @note = Note.new note_params
     @note.service = @service
+    @note.user = current_user
     respond_to do |format|
       if @note.save
         format.js { render :create_success }
@@ -28,5 +29,6 @@ class NotesController < ApplicationController
       end
     end
   end
+
 
 end

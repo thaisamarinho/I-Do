@@ -12,6 +12,8 @@ class User < ApplicationRecord
                         class_name: 'Wedding',
                         foreign_key: :groom_id
 
+  has_many :notes, dependent: :nullify
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
