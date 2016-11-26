@@ -1,0 +1,10 @@
+
+<%= form_for [service, Note.new], remote: true  do |n| %>
+  <div class="form-group col-md-12">
+    <div> <%= n.label :Note %> </div>
+      <div> <%= n.text_area :body %> </div>
+  </div>
+  <div class="form-group col-md-12">
+    <%= n.submit class: 'btn btn-primary' %>
+  </div>
+<%end%>

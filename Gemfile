@@ -60,6 +60,9 @@ gem 'cancancan'
 gem 'rack-cors'
 gem 'font-awesome-rails'
 gem 'chosen-rails'
+gem 'simple_form'
+gem 'best_in_place'
+gem "responders"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

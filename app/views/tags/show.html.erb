@@ -1,26 +1,25 @@
 <h1 class="name"><%= @tag.name %></h1><br>
 
 <% @taggings.map do |t| %>
+  <div class="col-md-4 tag-index">
+    <p>Vendor:<strong> <%= t.service.vendor %></strong></p>
+    <p>Price($): <%= t.service.price %></p>
+    <p>Budget($): <%= t.service.budget %></p>
+    <p><%if t.service.status >= 0 %>
+      Status: <i style="color:green"><%=t.service.status%></i>
+    <%else%>
+      Status: <i style="color:red"><%=t.service.status%></i>
+    <%end%>
+    </p>
+    <p>Hired: <%= t.service.chosen %></p>
+    <div id="note-form_<%= dom_id(t.service) %>">
+      <%= render '/notes/form', {service: t.service} %>
+    </div>
 
-<table class="table">
-  <tr class="table-header">
-    <td>Vendor</td>
-    <td>Vendor Price</td>
-    <td>Budget</td>
-    <td>Status</td>
-    <td>Hired</td>
-  </tr>
-  <tr>
-    <td><%= t.service.vendor %></td>
-    <td><%= t.service.price %></td>
-    <td><%= t.service.budget %></td>
-      <%if t.service.status >= 0 %>
-        <td style="color:green"><%=t.service.status%></td>
-      <%else%>
-        <td style="color:red"><%=t.service.status%></td>
+    <div id="<%= dom_id(t.service) %>">
+      <% t.service.notes.order(created_at: :desc).each do |note| %>
+        <%= render('/notes/note', {note: note, service: t.service}) %>
       <%end%>
-    <td><%= t.service.chosen %></td>
-  </tr>
-</table>
-
+    </div>
+  </div>
 <%end%>

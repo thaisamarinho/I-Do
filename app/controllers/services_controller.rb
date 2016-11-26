@@ -1,13 +1,13 @@
 class ServicesController < ApplicationController
-  before_action :find_service, only: [:destroy]
-  def new
-    @service = Service.new task_params
-  end
+  before_action :find_service, only: [:destroy, :update]
+  before_action :find_wedding, only: [:create, :index]
+  respond_to :html, :json
 
   def create
-    @service = Service.new task_params
+    @service = Service.new service_params
+    @service.wedding = @wedding
     @service.save
-    redirect_to services_path
+    redirect_to wedding_services_path(@wedding)
   end
 
   def index
@@ -15,16 +15,14 @@ class ServicesController < ApplicationController
     @services = Service.order(:vendor)
   end
 
-  def show
-  end
-  def edit
-  end
   def update
+    @service.update_attributes(service_params)
+    respond_with @service
   end
 
   def destroy
     @service.destroy
-    redirect_to services_path
+    respond_with @service
   end
 
   private
@@ -33,7 +31,11 @@ class ServicesController < ApplicationController
     @service = Service.find params[:id]
   end
 
-  def task_params
+  def find_wedding
+    @wedding = Wedding.find params[:wedding_id]
+  end
+
+  def service_params
     params.require(:service).permit(:vendor, :price, :budget, :chosen, tag_ids: [])
   end
 end
