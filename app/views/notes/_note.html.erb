@@ -7,8 +7,7 @@
 
     <div>
       <%# if (can? :manage, @message) || (can? :delete, message) %>
-        <%= link_to service_note_path((@service || service), note),
-                                     method: :delete,
+        <%= link_to note_path(note), method: :delete,
                                      remote: true,
                                      data: { confirm: 'Are you sure you want to delete this note?'},
                                      class: 'pull-right' do %>

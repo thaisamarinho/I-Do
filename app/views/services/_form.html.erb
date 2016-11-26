@@ -1,6 +1,6 @@
 <%= @service.errors.messages.values.join(", ")%>
 <div class="form-inline">
-  <%= form_for @service do |s| %>
+  <%= form_for @service, url: wedding_services_path(@wedding) do |s| %>
     <div class="form-group">
       <%=s.label "Category" %>
       <%= s.collection_select(
