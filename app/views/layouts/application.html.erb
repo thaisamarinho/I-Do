@@ -23,8 +23,6 @@
         <div class="navbar-collapse collapse" id="ido-navbar">
           <ul class="nav navbar-nav">
             <li><%= link_to 'Home', home_path %></li>
-            <li><%= link_to 'Guests', guests_path %></li>
-            <li><%= link_to 'Services', services_path %></li>
             <li><%= link_to 'New Wedding', new_wedding_path %></li>
           </ul>
 
@@ -33,6 +31,14 @@
                 <li>
                   <p class="navbar-text">Hello <%=current_user.first_name%></p>
                 </li>
+                <% current_user.weddings.each do |wedding|%>
+                  <li>
+                    <%= link_to 'My Guests', wedding_guests_path(wedding.id) %>
+                  </li>
+                  <li>
+                    <%= link_to 'My Services', wedding_services_path(wedding.id) %>
+                  </li>
+                <%end%>
                 <li><%= button_to 'Sign Out', sessions_path, method: :delete, class: 'btn btn-default navbar-btn' %></li>
             <% else %>
               <li><%= link_to 'Sign up', new_user_path %></li>

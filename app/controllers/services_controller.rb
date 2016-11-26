@@ -5,12 +5,15 @@ class ServicesController < ApplicationController
   end
 
   def create
+    @wedding = Wedding.find params[:wedding_id]
     @service = Service.new task_params
+    @service.wedding = @wedding
     @service.save
-    redirect_to services_path
+    redirect_to wedding_services_path(@wedding)
   end
 
   def index
+    @wedding = Wedding.find params[:wedding_id]
     @service = Service.new
     @services = Service.order(:vendor)
   end
@@ -23,8 +26,9 @@ class ServicesController < ApplicationController
   end
 
   def destroy
+    @wedding = @service.wedding
     @service.destroy
-    redirect_to services_path
+    redirect_to wedding_services_path(@wedding)
   end
 
   private

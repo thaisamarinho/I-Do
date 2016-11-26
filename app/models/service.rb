@@ -1,4 +1,5 @@
 class Service < ApplicationRecord
+  belongs_to :wedding
 
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings

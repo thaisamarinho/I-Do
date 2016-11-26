@@ -1,6 +1,6 @@
 <%= @guest.errors.messages.values.join(", ")%>
 <div class="form-inline">
-  <%= form_for  @guest do |g| %>
+  <%= form_for  @guest, url: wedding_guests_path(@wedding) do |g| %>
     <div class="form-group">
       <%=g.label "Guest's First Name" %>
       <%=g.text_field :first_name %>&nbsp;&nbsp;

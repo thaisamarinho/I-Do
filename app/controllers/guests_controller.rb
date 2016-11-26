@@ -1,6 +1,7 @@
 class GuestsController < ApplicationController
   before_action :find_guest, only:[:edit, :update, :destroy]
   def index
+    @wedding = Wedding.find params[:wedding_id]
     @guest = Guest.new
     @guests = Guest.order(:first_name)
     @guests = Guest.search(params[:search]).order(:first_name) if params[:search]
@@ -10,10 +11,12 @@ class GuestsController < ApplicationController
   end
 
   def create
+    @wedding = Wedding.find params[:wedding_id]
     @guests = Guest.order(first_name: :asc)
     @guest = Guest.new guest_params
+    @guest.wedding = @wedding
     if @guest.save
-      redirect_to guests_path
+      redirect_to wedding_guests_path(@wedding)
     else
       render :index
     end
@@ -26,12 +29,13 @@ class GuestsController < ApplicationController
 
   def update
     @guest.update guest_params
-    redirect_to guests_path
+    redirect_to wedding_guests_path(@guest.wedding)
   end
 
   def destroy
+    @wedding = @guest.wedding
     @guest.destroy
-    redirect_to guests_path
+    redirect_to wedding_guests_path(@wedding)
   end
 
   private
