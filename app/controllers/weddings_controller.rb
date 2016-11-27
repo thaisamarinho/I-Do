@@ -1,10 +1,19 @@
 class WeddingsController < ApplicationController
 
-  before_action :find_wedding, only: [:destroy]
+  before_action :find_wedding, only: [:show, :destroy]
 
   def new
     @wedding = Wedding.new
   end
+
+  def index
+    @weddings = Wedding.order(created_at: :desc)
+    @wedding = Wedding.search(params[:search]).order(:name) if params[:search]  
+  end
+
+  def show
+  end
+
 
   def create
     role_params = {
@@ -36,7 +45,7 @@ class WeddingsController < ApplicationController
     params.require(:wedding).permit([:name,
                                      :budget,
                                      :date,
-                                     :bride_id, 
+                                     :bride_id,
                                      :groom_id,
                                      :owner_id,
                                      :role])
