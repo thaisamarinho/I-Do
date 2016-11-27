@@ -1,0 +1,17 @@
+<div class="row">
+  <div>
+    <%= simple_form_for  @gift, url: wedding_gifts_path(@wedding) do |g| %>
+        <%=g.input :item %>
+        <%=g.input :description %>
+        <%=g.input :quantity %>
+      <div>
+        <%= g.file_field :image, multiple: :true %>
+        <%= g.hidden_field :image_cache %>
+      </div>
+    <%= g.submit btn_label, :class=> 'bnt btn-primary btn-block'%>
+      </br>
+        </br>
+          </br>
+    <%end%>
+  </div>
+</div>

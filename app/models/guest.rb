@@ -26,8 +26,8 @@ class Guest < ApplicationRecord
   end
 
   def capitalize_guest
-    self.first_name = first_name.capitalize
-    self.last_name = last_name.capitalize
+    self.first_name = first_name.titleize
+    self.last_name = last_name.titleize
   end
 
 end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :weddings, shallow: true do
     resources :guests
+    resources :gifts
     resources :services do
       resources :notes
     end
