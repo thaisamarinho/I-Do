@@ -1,1 +1,54 @@
-<%= @wedding.name %>
+<h1><%= @wedding.name %></h1><br>
+<div>
+
+  <div class="col-md-3 wedding-show center">
+    <h4 class="center">RSVP</h4>
+    <a href="#" class="rsvp">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </a>
+  </div>
+
+  <div class="col-md-3 wedding-show">
+    <h4 class="center">Wedding Registry</h4>
+  </div>
+
+  <div class="col-md-3 wedding-show">
+    <h4 class="center">Wedding Info</h4>
+  </div>
+
+
+</div><br>
+
+<div id='guest-list'>
+
+  <div class="col-md-5 guests">
+    <div class="search-form">
+      <%= render 'search_guest' %>
+    </div><br>
+    <hr>
+
+    <div>
+      <ul class="all-guests" style="list-style-type: none;">
+        <% @all_guests.each do |guest| %>
+          <li class="guest-name" id="<%= dom_id(guest)%>">
+            <%= guest.first_name %> <%= guest.last_name %>
+            <a>
+              <span class="glyphicon glyphicon-arrow-right pull-right confirm"></span>
+            </a>
+            <hr>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="col-md-5 rsvp-true">
+    <h4>Confirmed Guests: </h4>
+    <ul class="confirmed-guest" style="list-style-type: none;">
+    </ul>
+    <br>
+    <button type="submit" class="button-confirm pull-right">Confirm</button>
+  </div>
+
+</div>

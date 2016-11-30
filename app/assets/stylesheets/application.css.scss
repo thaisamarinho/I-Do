@@ -69,6 +69,30 @@ span.search {
   border-radius: 5px;
   margin: 5px;
 }
+.wedding-show {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  height: 200px;
+}
 .note-footer {
   font-size: 12px;
+}
+.center {
+  text-align: center;
+}
+
+.guests {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  height: 300px;
+  overflow: scroll;
+}
+.rsvp-true {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  height: 300px;
+  overflow: scroll;
 }

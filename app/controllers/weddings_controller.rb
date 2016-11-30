@@ -6,12 +6,19 @@ class WeddingsController < ApplicationController
     @wedding = Wedding.new
   end
 
-  def index
-    @weddings = Wedding.order(created_at: :desc)
-    @wedding = Wedding.search(params[:search]).order(:name) if params[:search]  
-  end
-
   def show
+    @all_guests = Guest.where(rsvp: false).order(:first_name)
+    @guests = Guest.search(params[:search]).where(rsvp: false).order(:first_name) if params[:search]
+
+    respond_to do |format|
+      if params[:search].present?
+        format.html { render :show }
+        format.js { render :searched_guest }
+      else
+        format.html {render :show, alert: 'danger'}
+        format.js { render js: 'alert("danger!")' }
+      end
+    end
   end
 
 
