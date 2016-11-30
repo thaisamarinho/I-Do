@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <%= render 'form', {btn_label: 'Add Gift'} %>
+</div>
+
+<div class="col-md-12">
+  <h1 class="title">Wedding Registry</h1><br>
+  <% @gifts.each do |g| %>
+  <table class="table">
+    <tr>
+      <td>Picture</td>
+      <td>Item</td>
+      <td>Quantity</td>
+    </tr>
+    <tr>
+      <td><%= image_tag g.image[0].url(:medium), class: 'image-index' %></td>
+      <td>
+        <h3><%= g.item %></h3>
+        <p><%= g.description %></p>
+      </td>
+      <td><%= g.quantity %></td>
+    </tr>
+  </table>
+  <% end %>
+</div>
+
+<a href='https://www.amazon.com/Vitamix-Standard-Blender-Certified-Refurbished/dp/B00LBFUKIA/ref=sr_1_5?s=kitchen&ie=UTF8&qid=1480209665&sr=1-5&keywords=vitamix'>Vitamix</a>

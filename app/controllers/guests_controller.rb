@@ -23,8 +23,15 @@ class GuestsController < ApplicationController
   end
 
   def update
-    @guest.update_attributes(guest_params)
-    respond_with @guest
+    respond_to do |format|
+      if @guest.update_attributes(guest_params)
+        format.html { redirect_to wedding_path(@guest.wedding)}
+        format.js {render js: 'alert("Success!")'}
+      else
+        format.html { redirect_to :back, alert: 'Could not rsvp guest(s)' }
+        format.js {render js: 'alert("Could not rsvp guest(s)")'}
+      end
+    end
   end
 
   def destroy

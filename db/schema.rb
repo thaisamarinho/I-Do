@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126024845) do
+ActiveRecord::Schema.define(version: 20161126211020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "gifts", force: :cascade do |t|
+    t.string   "item"
+    t.text     "description"
+    t.string   "image",       default: [],              array: true
+    t.integer  "quantity"
+    t.integer  "wedding_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["wedding_id"], name: "index_gifts_on_wedding_id", using: :btree
+  end
 
   create_table "guests", force: :cascade do |t|
     t.string   "first_name"
@@ -87,6 +98,7 @@ ActiveRecord::Schema.define(version: 20161126024845) do
     t.index ["owner_id"], name: "index_weddings_on_owner_id", using: :btree
   end
 
+  add_foreign_key "gifts", "weddings"
   add_foreign_key "guests", "weddings"
   add_foreign_key "notes", "services"
   add_foreign_key "notes", "users"

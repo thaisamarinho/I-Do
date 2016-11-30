@@ -8,4 +8,8 @@ class Wedding < ApplicationRecord
 
   attr_accessor :role
 
+  def self.search(search)
+    where("name ILIKE ?", "%#{search}%")
+  end
+
 end

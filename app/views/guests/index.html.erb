@@ -59,7 +59,7 @@
       <% @guests %>
       <a href="/weddings/<%=@wedding.id%>/guests">Guests' List</a>
       <%else%>
-        <p>There is no Guest containing the term(s) <%= params[:search] %>.</p>
+        <p>There is no Guest containing the term(s):  <%= params[:search] %>.</p>
         <a href="/weddings/<%=@wedding.id%>/guests">Guests' List</a>
       <%end%>
   <% end %>
