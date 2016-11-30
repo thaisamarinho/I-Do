@@ -17,7 +17,10 @@ class ServicesController < ApplicationController
 
   def update
     @service.update_attributes(service_params)
-    respond_with @service
+    respond_to do |format|
+      format.json { render json: {status: @service.status} }
+    end
+
   end
 
   def destroy
