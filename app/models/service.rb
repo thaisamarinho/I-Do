@@ -14,4 +14,12 @@ class Service < ApplicationRecord
     budget - price
   end
 
+  def status_display_color
+    if status >= 0
+      return 'color: green;'
+    else
+      return 'color: red;'
+    end
+  end
+
 end

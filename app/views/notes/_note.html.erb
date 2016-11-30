@@ -1,7 +1,7 @@
 <div class="col-md-12" id="<%= dom_id(note)%>">
   <div class="row">
     <div>
-      <p><%=best_in_place note, :body, type: :textarea %></p>
+      <p><%=best_in_place note, :body, as: :textarea %></p>
       <p class="note-footer">Last modified at: <%= note.updated_at %> by: <%= note.user.first_name %></p>
     </div>
 

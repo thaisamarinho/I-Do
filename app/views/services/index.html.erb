@@ -9,28 +9,26 @@
 <table class="table">
   <tr>
     <td class="name"><h3>Category</h3></td>
-    <td><h3>Bugdet($)</h3></td>
+    <td><h3>Budget($)</h3></td>
     <td><h3>Vendor</h3></td>
     <td><h3>Vendor Price($)</h3></td>
     <td><h3>Status</h3></td>
     <td><h3>Manage Service</h3></td>
   </tr>
   <% @services.each do |t|%>
-    <tr>
+    <tr id="<%= dom_id(t)%>">
       <td>
         <% t.tags.sort.each do |tag| %>
           <%=link_to "#{tag.name}", tag_path(tag.id)%>
           <%= " | " if (tag != t.tags.last)%>
         <%end%>
       </td>
-      <td><%= best_in_place t, :budget %></td>
-      <td><%= best_in_place t, :vendor %></td>
-      <td><%= best_in_place t, :price%></td>
-      <%if t.status >= 0 %>
-        <td style="color:green"><%=t.status%></td>
-      <%else%>
-        <td style="color:red"><%=t.status%></td>
-      <%end%>
+      <td class="budget" ><%= best_in_place t, :budget %></td>
+      <td class="vendor"><%= best_in_place t, :vendor %></td>
+      <td class="price"><%= best_in_place t, :price, data: {id: dom_id(t)} %></td>
+      <td class="status" style="<%= t.status_display_color %>">
+        <%= t.status%>
+      </td>
       <td>
         <%= link_to edit_service_path(t) do %>
           <span class="glyphicon glyphicon-pencil"></span>
