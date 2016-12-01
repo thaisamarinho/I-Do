@@ -23,13 +23,18 @@ class GuestsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @guest.update_attributes(guest_params)
-        format.html { redirect_to wedding_path(@guest.wedding)}
-        format.js {render js: 'alert("Success!")'}
-      else
-        format.html { redirect_to :back, alert: 'Could not rsvp guest(s)' }
-        format.js {render js: 'alert("Could not rsvp guest(s)")'}
+    if current_user == @guest.wedding.bride
+      @guest.update_attributes(guest_params)
+      respond_with @guest
+    else
+      respond_to do |format|
+        if @guest.update_attributes(guest_params)
+          format.html { redirect_to wedding_path(@guest.wedding)}
+          format.js {render js: 'alert("We are very happy to have you with us in this great moment.")'}
+        else
+          format.html { redirect_to :back, alert: 'Could not rsvp guest(s)' }
+          format.js {render js: 'alert("Could not rsvp guest(s)")'}
+        end
       end
     end
   end

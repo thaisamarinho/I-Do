@@ -41,6 +41,9 @@
                   <li>
                     <%= link_to 'My Registry', wedding_gifts_path(wedding.id) %>
                   </li>
+                  <li>
+                    <%= link_to 'My Admins', wedding_admins_path(wedding.id) %>
+                  </li>
                 <%end%>
                 <li><%= button_to 'Sign Out', sessions_path, method: :delete, class: 'btn btn-default navbar-btn' %></li>
             <% else %>

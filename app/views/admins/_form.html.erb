@@ -1,0 +1,10 @@
+<%= @admin.errors.messages.values.join(", ")%>
+<div class="form-inline">
+  <%= form_for @admin, url: wedding_admins_path(@wedding)  do |a| %>
+    <div class="form-group">
+      <%= a.label "Email" %>
+      <%= a.text_field :email %>
+    </div>&nbsp;&nbsp;
+
+    <%= a.submit btn_label %>
+  <% end %>
