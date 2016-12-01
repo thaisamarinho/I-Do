@@ -49,12 +49,4 @@ $(function() {
     })
     console.log(confirm);
   })
-
-
-  
-
-
-
-
-
 });
