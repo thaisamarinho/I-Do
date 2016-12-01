@@ -20,7 +20,6 @@ class ServicesController < ApplicationController
     respond_to do |format|
       format.json { render json: {status: @service.status} }
     end
-
   end
 
   def destroy

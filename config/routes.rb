@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :tags
 
   resources :weddings, shallow: true do
+    resources :admins
     resources :guests
     resources :gifts
     resources :services do

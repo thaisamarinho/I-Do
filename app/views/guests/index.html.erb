@@ -27,13 +27,25 @@
   <% @guests.each do |g|%>
     <tr id="<%= dom_id(g)%>">
       <div>
-        <td class="names"><%=best_in_place g, :first_name%> <%=best_in_place g, :last_name%></td>
+        <td class="names">
+          <%=best_in_place g, :first_name%>
+          <%=best_in_place g, :last_name%>
+            <strong>
+              <%= best_in_place g, :plus_one, as: :checkbox, collection: ['<span class="glyphicon glyphicon-user"></span>'.html_safe,
+                '<span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span>'.html_safe]  %>
+            </strong>
+        </td>
       </div>
       <td class="rsvp-change">
-        <%=best_in_place g, :rsvp, as: :checkbox, collection: [
-          '<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>'.html_safe,
-          '<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;"></span>'.html_safe ], data: {id: dom_id(g)} %>
-        <span class="plus-one" style="display: none;"><%= g.plus_one %></span>
+        <%=best_in_place g, :rsvp,
+                            as: :checkbox,
+                            collection: [
+                              '<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>'.html_safe,
+                              '<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;"></span>'.html_safe ],
+                            data: {id: dom_id(g)} %>
+        <span class="plus-one" style="display: none;">
+          <%= g.plus_one %>
+        </span>
       </td>
       <td>
         <%= link_to  do %>
