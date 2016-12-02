@@ -3,15 +3,6 @@ class User < ApplicationRecord
   before_validation :downcase_email
 
   has_many :weddings, inverse_of: :owner, foreign_key: :owner_id
-
-  has_many :brides_for, inverse_of: :bride,
-                        class_name: 'Wedding',
-                        foreign_key: :bride_id
-
-  has_many :grooms_for, inverse_of: :groom,
-                        class_name: 'Wedding',
-                        foreign_key: :groom_id
-
   has_many :notes, dependent: :nullify
 
   validates :first_name, presence: true

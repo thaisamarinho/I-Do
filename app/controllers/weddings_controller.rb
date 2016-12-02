@@ -1,6 +1,6 @@
 class WeddingsController < ApplicationController
-
-  before_action :find_wedding, only: [:show, :destroy]
+  before_action :find_wedding, only: [:show, :destroy, :update]
+  respond_to :html, :json
 
   def new
     @wedding = Wedding.new
@@ -21,20 +21,20 @@ class WeddingsController < ApplicationController
     end
   end
 
-
   def create
-    role_params = {
-      owner: current_user
-    }
-    role_params[:bride] = current_user if params[:wedding][:role] == 'bride'
-    role_params[:groom] = current_user if params[:wedding][:role] == 'groom'
-
-    wedding = Wedding.new wedding_params.merge(role_params)
-
+    wedding = Wedding.new wedding_params
+    wedding.owner = current_user
     if wedding.save
       redirect_to home_path
     else
       render :new
+    end
+  end
+
+  def update
+    @wedding.update_attributes(wedding_params)
+    respond_to do |format|
+      format.json { render json: 'Alert("deleted!")' }
     end
   end
 
@@ -46,14 +46,16 @@ class WeddingsController < ApplicationController
     end
   end
 
+  def index
+    @wedding = Wedding.where(owner_id: current_user)
+  end
+
   private
 
   def wedding_params
     params.require(:wedding).permit([:name,
                                      :budget,
                                      :date,
-                                     :bride_id,
-                                     :groom_id,
                                      :owner_id,
                                      :role])
   end
