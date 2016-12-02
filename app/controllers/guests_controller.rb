@@ -23,7 +23,7 @@ class GuestsController < ApplicationController
   end
 
   def update
-    if current_user == @guest.wedding.bride
+    if current_user == @guest.wedding.owner
       @guest.update_attributes(guest_params)
       respond_with @guest
     else

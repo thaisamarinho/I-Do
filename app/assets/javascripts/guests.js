@@ -4,7 +4,7 @@ jQuery(function() {
     var rsvp = $(event.delegateTarget).html();
     var confirmedGuest = parseInt($('.confirmed-guest-count').html());
     var guestId = $(event.delegateTarget).data('id');
-    var plusOne = $(`#best_in_place_${guestId}_rsvp`).siblings().html();
+    var plusOne = $(`#best_in_place_${guestId}_rsvp`).siblings().html().trim();
 
     if (rsvp === '<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>'){
       if(plusOne == 'true'){

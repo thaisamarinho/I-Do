@@ -4,23 +4,33 @@
 
 <div class="col-md-12">
   <h1 class="title">Wedding Registry</h1><br>
-  <% @gifts.each do |g| %>
   <table class="table">
     <tr>
-      <td>Picture</td>
       <td>Item</td>
+      <td>Link</td>
+      <td>Description</td>
       <td>Quantity</td>
+      <td>Manage Gifts</td>
     </tr>
+  <% @gifts.each do |g| %>
     <tr>
-      <td><%= image_tag g.image[0].url(:medium), class: 'image-index' %></td>
       <td>
-        <h3><%= g.item %></h3>
-        <p><%= g.description %></p>
+        <%= best_in_place g, :item %>
       </td>
-      <td><%= g.quantity %></td>
+      <td>
+        <a href="<%= g.link %>">Product Example</a>
+      </td>
+      <td><%= best_in_place g, :description, as: :textarea %></td>
+      <td><%= best_in_place g, :quantity %></td>
+      <td>
+        <%= link_to edit_gift_path(g) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+        <%= link_to gift_path(g), method: :delete do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <%end%>
+      </td>
     </tr>
-  </table>
   <% end %>
+</table>
 </div>
-
-<a href='https://www.amazon.com/Vitamix-Standard-Blender-Certified-Refurbished/dp/B00LBFUKIA/ref=sr_1_5?s=kitchen&ie=UTF8&qid=1480209665&sr=1-5&keywords=vitamix'>Vitamix</a>
