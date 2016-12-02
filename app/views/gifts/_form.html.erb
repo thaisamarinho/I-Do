@@ -1,17 +1,28 @@
-<div class="row">
-  <div>
-    <%= simple_form_for  @gift, url: wedding_gifts_path(@wedding) do |g| %>
-        <%=g.input :item %>
-        <%=g.input :description %>
-        <%=g.input :quantity %>
-      <div>
-        <%= g.file_field :image, multiple: :true %>
-        <%= g.hidden_field :image_cache %>
-      </div>
-    <%= g.submit btn_label, :class=> 'bnt btn-primary btn-block'%>
+<div class="form-inline">
+  <%= form_for  @gift, url: wedding_gifts_path(@wedding) do |g| %>
+    <div class="form-group">
+      <%= g.label 'Item name' %>
+      <%= g.text_field :item %>
+    </div>
+    <div class="form-group">
+      <%= g.label :link %>
+      <%= g.text_field :link %>
+    </div>
+    <div class="form-group">
+      <%= g.label :description %>
+      <%= g.text_area :description %>
+    </div>
+    <div class="form-group">
+      <%= g.label :quantity %>
+      <%= g.text_field  :quantity %>
+    </div>
+    <div class="form-group">
+      <%= g.file_field :image, multiple: :true %>
+      <%= g.hidden_field :image_cache %>
+    </div>
+  <%= g.submit btn_label %>
+    </br>
       </br>
         </br>
-          </br>
-    <%end%>
-  </div>
+  <%end%>
 </div>

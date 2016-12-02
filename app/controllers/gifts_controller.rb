@@ -46,6 +46,7 @@ class GiftsController < ApplicationController
     params.require(:gift).permit([:item,
                                   :description,
                                   :quantity,
+                                  :link,
                                   { image: [] }])
   end
 end
