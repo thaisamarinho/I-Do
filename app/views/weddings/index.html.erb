@@ -1,0 +1,18 @@
+<h1>Wedding Info:</h1>
+<%@wedding.each do |w|%>
+<div class="col-md-3 wedding-show">
+  <div class="pull-right">
+    <%= link_to edit_wedding_path(w) do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+    <% end %>
+    <%= link_to wedding_path(w), method: :delete do %>
+      <span class="glyphicon glyphicon-trash"></span>
+    <%end%>
+  </div>
+  <p>
+    Name: <h4><strong><%= best_in_place w, :name %></strong></h4>
+    Budget($): <h4><strong><%= best_in_place w, :budget %></strong></h4>
+    Date: <h4><strong><%= best_in_place w, :date %></strong></h4>
+  </p>
+</div>
+<% end %>
