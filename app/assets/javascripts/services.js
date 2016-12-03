@@ -1,6 +1,6 @@
 jQuery(function() {
 
-  $('.best_in_place').best_in_place()
+  $('.best_in_place').best_in_place();
   $('.best_in_place').bind('ajax:success', function(data) {
     var serviceId = $(this).data('id');
     var budget = $(`#best_in_place_${serviceId}_budget`).html();
