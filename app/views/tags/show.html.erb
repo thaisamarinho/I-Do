@@ -2,16 +2,16 @@
 
 <% @taggings.map do |t| %>
   <div class="col-md-4 tag-index">
-    <p>Vendor:<strong> <%= t.service.vendor %></strong></p>
-    <p>Price($): <%= t.service.price %></p>
-    <p>Budget($): <%= t.service.budget %></p>
+    <p>Vendor:<strong> <%= best_in_place t.service, :vendor %></strong></p>
+    <p>Price($): <%= best_in_place t.service, :price %></p>
+    <p>Budget($): <%= best_in_place t.service, :budget %></p>
     <p><%if t.service.status >= 0 %>
-      Status: <i style="color:green"><%=t.service.status%></i>
+      Status: <i style="color:green"><%= best_in_place t.service, :status%></i>
     <%else%>
-      Status: <i style="color:red"><%=t.service.status%></i>
+      Status: <i style="color:red"><%=best_in_place t.service, :status%></i>
     <%end%>
     </p>
-    <p>Hired: <%= t.service.chosen %></p>
+    <p>Hired: <%= best_in_place t.service, :chosen, as: :checkbox, collection: ['No', 'Yes'] %></p>
     <div id="note-form_<%= dom_id(t.service) %>">
       <%= render '/notes/form', {service: t.service} %>
     </div>

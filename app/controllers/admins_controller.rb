@@ -13,6 +13,7 @@ class AdminsController < ApplicationController
     @admin.wedding = current_user.weddings.last
     @admin.token = SecureRandom.hex(32)
     @admin.save
+    AdminMailer.notify_admin(@admin).deliver_now
     redirect_to wedding_path(@wedding)
   end
 
