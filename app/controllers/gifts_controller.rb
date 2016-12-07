@@ -22,8 +22,22 @@ class GiftsController < ApplicationController
   end
 
   def update
-    @gift.update_attributes(gift_params)
-    respond_with @gift
+    if (current_user == @gift.wedding.owner) #remmember to change this line with can manage wedding
+      @gift.update_attributes(gift_params)
+      respond_with @gift
+    else
+      respond_to do |format|
+        if @gift.quantity > 0
+          if @gift.update_attributes(gift_params)
+            format.html { redirect_to wedding_path(@gift.wedding)}
+            format.js {render js: 'alert("Your presence in our Wedding is the biggest gift you can give to us. Thank You")'}
+          else
+            format.html { redirect_to :back, alert: 'Could not pick this gift' }
+            format.js {render js: 'alert("Could not pick this gift")'}
+          end
+        end
+      end
+    end
   end
 
   def destroy
@@ -40,7 +54,7 @@ class GiftsController < ApplicationController
 
   def find_wedding
     @wedding = Wedding.find params[:wedding_id]
-    @gifts = Gift.order(:item)
+    @gifts = Gift.where(wedding: @wedding).order(:item)
   end
   def gift_params
     params.require(:gift).permit([:item,

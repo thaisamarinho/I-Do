@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :tags
 
   resources :weddings, shallow: true do
+    get 'weddings/show_admin' => 'weddings#show_admin', as: :details
     resources :admins
     resources :guests
     resources :gifts

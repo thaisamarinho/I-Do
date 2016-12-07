@@ -1,4 +1,5 @@
 class WeddingsController < ApplicationController
+  before_action :authenticate_user
   before_action :find_wedding, only: [:show, :destroy, :update]
   respond_to :html, :json
 
@@ -7,8 +8,10 @@ class WeddingsController < ApplicationController
   end
 
   def show
-    @all_guests = Guest.where(rsvp: false).order(:first_name)
-    @guests = Guest.search(params[:search]).where(rsvp: false).order(:first_name) if params[:search]
+    @all_guests = Guest.display_guest(@wedding)
+    @guests = Guest.search(params[:search]).display_guest(@wedding) if params[:search]
+
+    @gifts = Gift.all
 
     respond_to do |format|
       if params[:search].present?
@@ -48,6 +51,11 @@ class WeddingsController < ApplicationController
 
   def index
     @wedding = Wedding.where(owner_id: current_user)
+    @admin = User.where(wedding_id: @wedding)
+  end
+
+  def show_admin
+    @wedding = Wedding.find params[:wedding_id]
   end
 
   private
@@ -57,6 +65,7 @@ class WeddingsController < ApplicationController
                                      :budget,
                                      :date,
                                      :owner_id,
+                                     {admin_id: []},
                                      :role])
   end
 

@@ -5,7 +5,9 @@ class GuestsController < ApplicationController
 
   def index
     @guest = Guest.new
-    @guests = Guest.search(params[:search]).order(:first_name) if params[:search]
+    @guests = Guest.where(wedding: @wedding)
+                   .search(params[:search])
+                   .order(:first_name) if params[:search]
   end
 
   def create
@@ -53,7 +55,7 @@ class GuestsController < ApplicationController
 
   def find_wedding
     @wedding = Wedding.find params[:wedding_id]
-    @guests = Guest.order(:first_name)
+    @guests = Guest.where(wedding: @wedding).order(:first_name)
   end
 
   def guest_params

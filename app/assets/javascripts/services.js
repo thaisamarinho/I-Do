@@ -1,7 +1,8 @@
 jQuery(function() {
 
-  $('.best_in_place').best_in_place();
-  $('.best_in_place').bind('ajax:success', function(data) {
+  $('#services_best .best_in_place').best_in_place();
+  $('#services_best .best_in_place').bind('ajax:success', function(data) {
+
     var serviceId = $(this).data('id');
     var budget = $(`#best_in_place_${serviceId}_budget`).html();
     var price = $(`#best_in_place_${serviceId}_price`).html();
