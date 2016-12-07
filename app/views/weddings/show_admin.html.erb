@@ -1,0 +1,7 @@
+<h1><%= @wedding.name %></h1>
+
+<ul>
+  <li><%= link_to 'My guests', wedding_guests_path(@wedding)%></li>
+  <li><%= link_to 'My Services', wedding_services_path(@wedding)%></li>
+  <li><%= link_to 'My Registry', wedding_gifts_path(@wedding)%></li>
+</ul>

@@ -1,6 +1,6 @@
 jQuery(function() {
-  $('.best_in_place').best_in_place();
-  $('.best_in_place').bind('ajax:success', function(event) {
+  $('#guest_best .best_in_place').best_in_place();
+  $('#guest_best .best_in_place').bind('ajax:success', function(event) {
     var rsvp = $(event.delegateTarget).html();
     var confirmedGuest = parseInt($('.confirmed-guest-count').html());
     var guestId = $(event.delegateTarget).data('id');

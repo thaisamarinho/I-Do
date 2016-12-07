@@ -13,6 +13,11 @@
     Name: <h4><strong><%= best_in_place w, :name %></strong></h4>
     Budget($): <h4><strong><%= best_in_place w, :budget %></strong></h4>
     Date: <h4><strong><%= best_in_place w, :date %></strong></h4>
+    Admins:
+      <p><%#= w.owner.first_name %></p>
+      <%# @admin.each do |a| %>
+        <p><%#= a.email %></p>
+      <%# end %>
   </p>
 </div>
 <% end %>

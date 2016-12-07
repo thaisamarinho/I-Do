@@ -4,16 +4,18 @@
     <td>Manage Wedding Party</td>
   </tr>
   <% @admins.each do |a| %>
-  <tr>
-    <td><%= best_in_place a, :email %></td>
-    <td>
-      <%= link_to edit_admin_path(a) do %>
-        <span class="glyphicon glyphicon-pencil"></span>
-      <% end %>
-      <%= link_to admin_path(a), method: :delete do %>
-        <span class="glyphicon glyphicon-trash"></span>
-      <%end%>
-    </td>
-  </tr>
+    <%if a.user != current_user %>
+      <tr>
+        <td><%= a.email %></td>
+        <td>
+          <%= link_to edit_admin_path(a) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_path(a), method: :delete do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <%end%>
+        </td>
+      </tr>
+    <% end %>
   <% end %>
 </table>

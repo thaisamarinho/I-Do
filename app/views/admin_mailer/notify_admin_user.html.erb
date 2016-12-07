@@ -1,0 +1,6 @@
+<p>Hello,</p>
+<p>You've Been invited to Join a wedding planning by <%= @wedding.owner.first_name %>.</p>
+<p>To accept this invitation and sign up click here: <%=link_to "#{@wedding.name}", new_session_url(wedding: @wedding.id, token: @admin.token, email: @admin.email) %> Wedding.</p>
+
+<p>Regards,</p>
+<p>I do Team.</p>

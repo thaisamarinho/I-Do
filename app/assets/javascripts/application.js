@@ -49,4 +49,22 @@ $(function() {
     })
     console.log(confirm);
   })
+
+  $('.pick-gift').on('click', function(event){
+    var giftId = parseInt(($(this).parents('tr').attr('id')).split("_")[1])
+    var quantityAfter = parseInt($(this).parents('td').siblings('.quantity').html()) - 1
+    var quantityBefore = $(this).parents('td').siblings('.quantity')
+
+    $.ajax({
+      url: `${DOMAIN}/gifts/${giftId}.js`,
+      type: 'patch',
+      data: {gift: {quantity: quantityAfter}},
+      success: function(){
+        quantityBefore.html(quantityAfter);
+      },
+      error: function() {
+        alert(`Could not pick this gift, please try again...`)
+      }
+    })
+  })
 });

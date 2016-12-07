@@ -12,14 +12,12 @@ class ServicesController < ApplicationController
 
   def index
     @service = Service.new
-    @services = Service.order(:vendor)
+    @services = Service.where(wedding: @wedding).order(:vendor)
   end
 
   def update
     @service.update_attributes(service_params)
-    respond_to do |format|
-      format.json { render json: {status: @service.status} }
-    end
+    respond_with @service
   end
 
   def destroy

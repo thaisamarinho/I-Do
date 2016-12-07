@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Sign In</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+
+        <%= form_tag sessions_path do %>
+          <div class="form-group">
+            <%= label_tag :email %>
+            <%= text_field_tag :email, nil, class: "form-control" %>
+          </div>
+          
+          <%= hidden_field_tag 'wedding_admin', @wedding %>
+
+          <div class="form-group">
+            <%= label_tag :password %>
+            <%= password_field_tag :password, nil, class: "form-control" %>
+          </div>
+
+
+
+        <div class="modal-footer">
+          <%= submit_tag 'Sign In', class: "btn btn-primary btn-block"%>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>

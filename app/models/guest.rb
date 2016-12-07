@@ -21,6 +21,10 @@ class Guest < ApplicationRecord
     (where(plus_one: true, rsvp: true).all.count) * 2
   end
 
+  scope :display_guest, -> (wedding) {
+    where(rsvp: false, wedding_id: wedding).order(:first_name)
+  }
+
 
   private
 
