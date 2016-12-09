@@ -16,7 +16,7 @@
 //= require jquery.purr
 //= require best_in_place
 //= require bootstrap-sprockets
-// require turbolinks
+//= require hopscotch
 //= require_tree .
 
 $(function() {
@@ -66,5 +66,38 @@ $(function() {
         alert(`Could not pick this gift, please try again...`)
       }
     })
+  })
+
+  var tourGuest = {
+    id: "edit-info",
+    steps: [
+      {
+        target: "hopscotch",
+        title: "Hi, do you need to edit?",
+        content: "Just click on the item you need to edit, make your changes and press enter!",
+        placement: "top",
+        xOffset: 'center',
+        arrowOffset: 'left'
+      }
+    ]
+  };
+  var tourService = {
+    id: "edit-info",
+    steps: [
+      {
+        target: "hopscotch",
+        title: "Hi, do you need to edit?",
+        content: "Just click on the item you need to edit (Vendor, Budget or Price), make your changes and press enter!",
+        placement: "top",
+        xOffset: 'center',
+        arrowOffset: 'center'
+      }
+    ]
+  };
+  $('table').on('click', '#glyphicon-pencil-guest', function(){
+    hopscotch.startTour(tourGuest);
+  })
+  $('table').on('click', '#glyphicon-pencil-service', function(){
+    hopscotch.startTour(tourService);
   })
 });

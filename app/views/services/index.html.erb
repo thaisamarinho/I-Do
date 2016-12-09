@@ -1,12 +1,23 @@
 <div>
+<%= render 'shared/wedding_nav', {wedding: @wedding} %>
+</div><br>
+<div>
 <%= render 'form', {btn_label: 'Add Service'} %>
 </div><br>
 
+
 <h1>Service's List</h1>
 <h1 class="col-md-6">Total Budget($): <%= @wedding.budget%></h1>
-<h1 class="col-md-6">Total Cost($): <%= Service.total_price%></h1>
+<h1 class="col-md-6 total_cost">
+  Total Cost($): <%= Service.total_price%>
+</h1>
 
-<table class="table" id="services_best">
+<ul class="nav nav-tabs">
+  <li class="<%= params[:hired] ? '' : 'active' %>"><a class="hired-tab" href="/weddings/<%= @wedding.id %>/services">All Services</a></li>
+  <li class="<%= params[:hired] ? 'active' : '' %>"><a class="hired-tab" href="?hired=true">Hired Services</a></li>
+</ul>
+
+<table class="table toggle-table" id="services_best">
   <tr>
     <td class="name"><h3>Category</h3></td>
     <td><h3>Budget($)</h3></td>
@@ -19,20 +30,18 @@
     <tr id="<%= dom_id(t)%>">
       <td>
         <% t.tags.sort.each do |tag| %>
-          <%=link_to "#{tag.name}", tag_path(tag.id)%>
+          <%=link_to "#{tag.name}", wedding_tag_path(@wedding, tag.id)%>
           <%= " | " if (tag != t.tags.last)%>
         <%end%>
       </td>
-      <td class="budget" ><%= best_in_place t, :budget %></td>
+      <td class="budget" id="hopscotch"><%= best_in_place t, :budget %></td>
       <td class="vendor"><%= best_in_place t, :vendor %></td>
-      <td class="price"><%= best_in_place t, :price, data: {id: dom_id(t)} %></td>
+      <td class="price"><%= best_in_place t, :price %></td>
       <td class="status" style="<%= t.status_display_color %>">
         <%= t.status%>
       </td>
       <td>
-        <%= link_to edit_service_path(t) do %>
-          <span class="glyphicon glyphicon-pencil"></span>
-        <% end %>
+          <a><span class="glyphicon glyphicon-pencil" id="glyphicon-pencil-service"></span></a>
         <%= link_to service_path(t), method: :delete do %>
           <span class="glyphicon glyphicon-trash"></span>
         <%end%>

@@ -19,7 +19,7 @@ class AdminsController < ApplicationController
     else
       AdminMailer.notify_admin(@admin).deliver_now
     end
-    redirect_to wedding_path(@wedding)
+    redirect_to wedding_details_path(@wedding)
   end
 
   def index

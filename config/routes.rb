@@ -7,10 +7,10 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
-  resources :tags
 
   resources :weddings, shallow: true do
     get 'weddings/show_admin' => 'weddings#show_admin', as: :details
+    get 'tags/:tag_id' => 'tags#show', as: :tag
     resources :admins
     resources :guests
     resources :gifts

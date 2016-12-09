@@ -1,10 +1,9 @@
 class Guest < ApplicationRecord
   belongs_to :wedding
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :name, presence: true, uniqueness: true
 
-  validates :first_name, uniqueness: {scope: :last_name, case_sensitive: false, message: "This guest is already in the list."}
+
   before_save :capitalize_guest
 
   def self.total_guests
@@ -13,7 +12,7 @@ class Guest < ApplicationRecord
   end
 
   def self.search(search)
-    where("first_name ILIKE ? OR last_name ILIKE ?", "%#{search}%", "%#{search}%")
+    where("name ILIKE ?", "%#{search}%")
   end
 
   def self.confirmed_guests
@@ -22,19 +21,14 @@ class Guest < ApplicationRecord
   end
 
   scope :display_guest, -> (wedding) {
-    where(rsvp: false, wedding_id: wedding).order(:first_name)
+    where(rsvp: false, wedding_id: wedding).order(:name)
   }
 
 
   private
 
-  def full_name
-    first_name + " " + last_name
-  end
-
   def capitalize_guest
-    self.first_name = first_name.titleize
-    self.last_name = last_name.titleize
+    self.name = name.titleize
   end
 
 end

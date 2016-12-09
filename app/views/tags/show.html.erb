@@ -1,21 +1,32 @@
+<div>
+<%= render 'shared/wedding_nav', {wedding: @wedding} %>
+</div><br>
 <h1 class="name"><%= @tag.name %></h1><br>
 
 <% @taggings.map do |t| %>
-  <div class="col-md-4 tag-index">
-    <p>Vendor:<strong> <%= best_in_place t.service, :vendor %></strong></p>
-    <p>Price($): <%= best_in_place t.service, :price %></p>
-    <p>Budget($): <%= best_in_place t.service, :budget %></p>
-    <p><%if t.service.status >= 0 %>
-      Status: <i style="color:green"><%= best_in_place t.service, :status%></i>
-    <%else%>
-      Status: <i style="color:red"><%=best_in_place t.service, :status%></i>
-    <%end%>
-    </p>
-    <p>Hired: <%= best_in_place t.service, :chosen, as: :checkbox, collection: ['No', 'Yes'] %></p>
+  <div class="col-md-4 tag-index" id="services_best">
+    <div class="pull-right">
+      <%= link_to  do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+      <% end %>
+      <%= link_to service_path(t), method: :delete do %>
+      <span class="glyphicon glyphicon-trash"></span>
+      <%end%>
+    </div>
+    <div id="<%= dom_id(t.service)%>">
+      <p>Vendor:<strong> <%= best_in_place t.service, :vendor %></strong></p>
+      <p>Price($): <%= best_in_place t.service, :price %></p>
+      <p>Budget($): <%= best_in_place t.service, :budget %></p>
+      <p>
+        Status: <i class='status' style="<%= t.service.status_display_color %>"><%= t.service.status %></i>
+      </p>
+      <p>Hired: <%= best_in_place t.service, :chosen, as: :checkbox, collection: [
+        '<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>'.html_safe,
+        '<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green;"></span>'.html_safe ] %></p>
+    </div>
     <div id="note-form_<%= dom_id(t.service) %>">
       <%= render '/notes/form', {service: t.service} %>
     </div>
-
     <div id="<%= dom_id(t.service) %>">
       <% t.service.notes.order(created_at: :desc).each do |note| %>
         <%= render('/notes/note', {note: note, service: t.service}) %>

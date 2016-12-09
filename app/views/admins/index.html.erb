@@ -1,3 +1,6 @@
+<div>
+<%= render 'shared/wedding_nav', {wedding: @wedding} %>
+</div><br>
 <table class="table">
   <tr>
     <td>Wedding Party</td>
@@ -8,9 +11,7 @@
       <tr>
         <td><%= a.email %></td>
         <td>
-          <%= link_to edit_admin_path(a) do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
+          <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
           <%= link_to admin_path(a), method: :delete do %>
             <span class="glyphicon glyphicon-trash"></span>
           <%end%>

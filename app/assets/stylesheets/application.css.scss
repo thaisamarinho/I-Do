@@ -16,6 +16,7 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import "font-awesome";
+ @import "hopscotch";
 
 body {
  background-image: url('background4.png');
@@ -73,7 +74,6 @@ span.search {
   border: 1px solid black;
   border-radius: 5px;
   margin: 5px;
-  height: 200px;
 }
 .note-footer {
   font-size: 12px;
@@ -102,4 +102,58 @@ span.search {
   margin: 5px;
   height: 300px;
   overflow: scroll;
+}
+
+.glyphicon-calendar {
+  font-size: 100px;
+}
+.glyphicon-gift {
+  font-size: 100px;
+}
+.wedding-box {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  height: 300px;
+  width: 300px;
+  text-align: center;
+}
+.wedding-pic-show {
+  width: 280px;
+  height: auto;
+  border-radius: 5px;
+}
+div.hopscotch-content, .hopscotch-title{
+  font-family: 'Raleway', sans-serif;
+}
+div.hopscotch-bubble .hopscotch-nav-button.next {
+  &:hover {
+
+    background-color: darkgrey;
+    background-image: none;
+  }
+  color: black;
+  background-color: lightgrey;
+  border-color: #ccc;
+  background-image: none;
+}
+
+div.hopscotch-bubble .hopscotch-bubble-number, .hopscotch-bubble-close {
+  background: none;
+}
+.nav-tabs{
+  position: relative;
+  top: 1px;
+}
+
+.active {
+  background-color: white;
+}
+.hired-tab {
+  background-img: url('background4.png');
+  padding: 0;
+}
+.toggle-table{
+  background-color: white;
+  border-top: none;
 }

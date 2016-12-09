@@ -6,19 +6,15 @@
 <div class="form-inline">
   <%= form_for  @guest, url: wedding_guests_path(@wedding) do |g| %>
     <div class="form-group">
-      <%=g.label "Guest's First Name" %>
-      <%=g.text_field :first_name %>&nbsp;&nbsp;
+      <%=g.label "Guest's Full Name" %>
+      <%=g.text_field :name %>&nbsp;&nbsp;
     </div>
     <div class="form-group">
-      <%=g.label "Guest's Last Name" %>
-      <%=g.text_field :last_name %>&nbsp;&nbsp;
-    </div>
-    <div class="form-group">
-      <%= g.check_box :rsvp%>
+      <%= g.check_box :rsvp, {}, '1', nil %>
       <%= g.label 'RSVP'%>&nbsp;&nbsp;
     </div>
     <div class="form-group">
-      <%= g.check_box :plus_one%>
+      <%= g.check_box :plus_one, {}, '1', '0'%>
       <%= g.label 'Plus one?'%>&nbsp;&nbsp;
     </div>
   <%= g.submit btn_label%>

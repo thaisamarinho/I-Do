@@ -7,6 +7,9 @@ class Wedding < ApplicationRecord
   has_many :users, through: :admins
   has_many :admins, dependent: :destroy
 
+  validates :name, presence: true
+  validates :budget, presence: true
+
 
   def self.search(search)
     where("name ILIKE ?", "%#{search}%")

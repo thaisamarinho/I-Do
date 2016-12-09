@@ -5,9 +5,15 @@ class GuestsController < ApplicationController
 
   def index
     @guest = Guest.new
-    @guests = Guest.where(wedding: @wedding)
-                   .search(params[:search])
-                   .order(:first_name) if params[:search]
+    if (params[:confirmed])
+      @guests = Guest.where(wedding: @wedding, rsvp: true)
+      .search(params[:search])
+      .order(:name) 
+    else
+      @guests = Guest.where(wedding: @wedding)
+      .search(params[:search])
+      .order(:name) if params[:search]
+    end
   end
 
   def create
@@ -55,10 +61,10 @@ class GuestsController < ApplicationController
 
   def find_wedding
     @wedding = Wedding.find params[:wedding_id]
-    @guests = Guest.where(wedding: @wedding).order(:first_name)
+    @guests = Guest.where(wedding: @wedding).order(:name)
   end
 
   def guest_params
-    params.require(:guest).permit(:first_name, :last_name, :rsvp, :plus_one)
+    params.require(:guest).permit(:name, :rsvp, :plus_one)
   end
 end

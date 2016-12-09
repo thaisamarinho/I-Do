@@ -34,7 +34,7 @@
       <ul class="all-guests" style="list-style-type: none;">
         <% @all_guests.each do |guest| %>
           <li class="guest-name" id="<%= dom_id(guest)%>">
-            <%= guest.first_name %> <%= guest.last_name %>
+            <%= guest.name %>
             <a>
               <span class="glyphicon glyphicon-arrow-right pull-right confirm"></span>
             </a>

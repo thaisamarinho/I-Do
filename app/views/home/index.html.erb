@@ -1,27 +1,34 @@
-
-  <div class="jumbotron-lua">
-  </div>
-<br>
-<br>
 <div class="col-md-3 search-form">
-  <%#byebug%>
   <%= form_tag(home_path, method: "get", id: "form-group") do %>
     <%= text_field_tag :search, params[:search] %>
     <%= button_tag do %>
       <span class="glyphicon glyphicon-search search"></span>
     <% end %>
   <% end %>
-</div><br><br>
+</div>
+<div class="jumbotron-lua">
+</div>
+<br>
+<br>
+<br><br>
 
 <div>
   <% if params[:search].present? %>
     <% if @wedding.present?%>
-      <%@wedding.each do |w|%>
-        <a href="weddings/<%= w.id %>"><%= w.name %></a>
-      <%end%>
-    <%else%>
+      <% @wedding.each do |w| %>
+        <div class="col-md-4 wedding-box">
+          <% if w.owner == current_user %> <!--CanCanCan here -->
+            <%= image_tag 'abraco.jpg', class: 'wedding-pic-show' %><br>
+            <a href="weddings/<%= w.id %>/weddings/show_admin"><%= w.name %></a>
+          <% else %>
+            <%= image_tag 'abraco.jpg', class: 'wedding-pic-show' %><br>
+            <a href="weddings/<%= w.id %>"><%= w.name %></a>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
         <p>There is no wedding containing the term(s):  <%= params[:search] %>.</p>
-    <%end%>
+    <% end %>
   <% end %>
 </div>
 <br>

@@ -6,8 +6,12 @@ class Service < ApplicationRecord
 
   has_many :notes, dependent: :destroy
 
+  scope :display_chosen, -> (wedding) {
+    where(chosen: true, wedding_id: wedding).order(:vendor)
+  }
+
   def self.total_price
-    all.map{|p| p.price}.sum
+    where(chosen: true).map{|p| p.price}.sum
   end
 
   def status

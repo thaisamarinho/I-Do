@@ -1,3 +1,6 @@
+<div>
+<%= render 'shared/wedding_nav', {wedding: @wedding} %>
+</div><br>
 <div class="col-md-9 form-guest">
   <%= render 'form', {btn_label: 'Add Guest'} %>
 </div>
@@ -18,7 +21,12 @@
                     </span>
 </h1>
 
-<table class="table" id='guests_best'>
+<ul class="nav nav-tabs">
+  <li class="<%= params[:confirmed] ? '' : 'active' %>"><a class="hired-tab" href="/weddings/<%= @wedding.id %>/guests">All Guests</a></li>
+  <li class="<%= params[:confirmed] ? 'active' : '' %>"><a class="hired-tab" href="?confirmed=true">Confirmed Guests</a></li>
+</ul>
+
+<table class="table toggle-table" id='guests_best'>
   <tr class="table-header">
     <td class="names"><h3>Guest Name</h3></td>
     <td><h3>Guest Confirmation</h3></td>
@@ -27,13 +35,12 @@
   <% @guests.each do |g|%>
     <tr id="<%= dom_id(g)%>">
       <div>
-        <td class="names">
-          <%=best_in_place g, :first_name%>
-          <%=best_in_place g, :last_name%>
-            <strong>
-              <%= best_in_place g, :plus_one, as: :checkbox, collection: ['<span class="glyphicon glyphicon-user"></span>'.html_safe,
-                '<span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span>'.html_safe]  %>
-            </strong>
+        <td class="names" id="hopscotch">
+          <%=best_in_place g, :name%>
+          <strong>
+            <%= best_in_place g, :plus_one, as: :checkbox, collection: ['<span class="glyphicon glyphicon-user"></span>'.html_safe,
+              '<span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span>'.html_safe]  %>
+          </strong>
         </td>
       </div>
       <td class="rsvp-change">
@@ -48,9 +55,7 @@
         </span>
       </td>
       <td>
-        <%= link_to  do %>
-          <span class="glyphicon glyphicon-pencil"></span>
-        <% end %>
+          <a href="#"><span class="glyphicon glyphicon-pencil" id="glyphicon-pencil-guest"></span></a>
         <%= link_to guest_path(g), method: :delete do %>
           <span class="glyphicon glyphicon-trash"></span>
         <%end%>

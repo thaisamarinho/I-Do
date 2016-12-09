@@ -56,6 +56,7 @@ class WeddingsController < ApplicationController
 
   def show_admin
     @wedding = Wedding.find params[:wedding_id]
+    @admin = Admin.where(wedding_id: @wedding)
   end
 
   private

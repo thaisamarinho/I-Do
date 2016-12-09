@@ -1,7 +1,25 @@
-<h1><%= @wedding.name %></h1>
 
-<ul>
-  <li><%= link_to 'My guests', wedding_guests_path(@wedding)%></li>
-  <li><%= link_to 'My Services', wedding_services_path(@wedding)%></li>
-  <li><%= link_to 'My Registry', wedding_gifts_path(@wedding)%></li>
-</ul>
+<div>
+<%= render 'shared/wedding_nav', {wedding: @wedding} %>
+</div><br>
+
+<h1><%= @wedding.name %></h1>
+<div class="col-md-3 wedding-show">
+  <div class="pull-right">
+    <%= link_to edit_wedding_path(@wedding) do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+    <% end %>
+    <%= link_to wedding_path(@wedding), method: :delete do %>
+      <span class="glyphicon glyphicon-trash"></span>
+    <%end%>
+  </div>
+  <p>
+    Name: <h4><strong><%= best_in_place @wedding, :name %></strong></h4>
+    Budget($): <h4><strong><%= best_in_place @wedding, :budget %></strong></h4>
+    Date: <h4><strong><%= best_in_place @wedding, :date %></strong></h4>
+    Admins:
+    <% @admin.each do |a| %>
+      <p><%= a.email %></p>
+    <% end %>
+  </p>
+</div>

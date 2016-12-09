@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+<div class="navbar-collapse collapse" id="ido-navbar">
+  <ul class="nav navbar-nav">
+    <li><%= link_to 'My Wedding', wedding_details_path(wedding) %></li>
+    <li><%= link_to 'My Guests', wedding_guests_path(wedding) %></li>
+    <li><%= link_to 'My Services', wedding_services_path(wedding) %></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Categories
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <% Tag.all.each do |t|%>
+          <li><%=link_to t.name, wedding_tag_path(wedding, t) %></li>
+        <%end%>
+      </ul>
+    </li>
+    <li><%= link_to 'Add Admins', new_wedding_admin_path(wedding) %></li>
+  </ul>
+</div>
+</div>
+</div>
+</nav>

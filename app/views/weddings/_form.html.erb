@@ -4,11 +4,11 @@
     <%= form_for @wedding do |w| %>
       <div class="form-group">
         <%= w.label :name %>
-        <%= w.text_field :name, class: "form-control", placeholder: 'ex: John&Joane' %>
+        <%= w.text_field :name, class: "form-control", placeholder: 'ex: Joane&John' %>
       </div>
       <div class="form-group">
         <%= w.label :budget %>($)
-        <%= w.text_field :budget, class: "form-control", placeholder: 'Please enter just numbers' %>
+        <%= w.text_field :budget, class: "form-control", placeholder: 'Please enter just numbers. You can change this later if you need to.' %>
       </div>
       <div class="form-group">
         <%= w.label :wedding_date %>

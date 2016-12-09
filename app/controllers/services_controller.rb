@@ -12,7 +12,11 @@ class ServicesController < ApplicationController
 
   def index
     @service = Service.new
-    @services = Service.where(wedding: @wedding).order(:vendor)
+    if (params[:hired])
+      @services = Service.display_chosen(@wedding)
+    else
+      @services = Service.where(wedding: @wedding).order(:vendor)
+    end
   end
 
   def update
