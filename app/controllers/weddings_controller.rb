@@ -8,7 +8,7 @@ class WeddingsController < ApplicationController
   end
 
   def show
-    @all_guests = Guest.display_guest(@wedding)
+    @all_guests = Guest.order(:name)
     @guests = Guest.search(params[:search]).display_guest(@wedding) if params[:search]
 
     @gifts = Gift.all
@@ -66,7 +66,7 @@ class WeddingsController < ApplicationController
                                      :budget,
                                      :date,
                                      :owner_id,
-                                     {admin_id: []},
+                                     {images: []},
                                      :role])
   end
 

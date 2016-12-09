@@ -8,7 +8,7 @@ class GuestsController < ApplicationController
     if (params[:confirmed])
       @guests = Guest.where(wedding: @wedding, rsvp: true)
       .search(params[:search])
-      .order(:name) 
+      .order(:name)
     else
       @guests = Guest.where(wedding: @wedding)
       .search(params[:search])
@@ -37,8 +37,13 @@ class GuestsController < ApplicationController
     else
       respond_to do |format|
         if @guest.update_attributes(guest_params)
-          format.html { redirect_to wedding_path(@guest.wedding)}
-          format.js {render js: 'alert("We are very happy to have you with us in this great moment.")'}
+          if @guest.rsvp == true
+            format.html { redirect_to wedding_path(@guest.wedding)}
+            format.js {render js: 'alert("😀👰🏽👱🎷🎉🎊")'}
+          else
+            format.html { redirect_to wedding_path(@guest.wedding)}
+            format.js {render js: 'alert("😱😢")'}
+          end
         else
           format.html { redirect_to :back, alert: 'Could not rsvp guest(s)' }
           format.js {render js: 'alert("Could not rsvp guest(s)")'}

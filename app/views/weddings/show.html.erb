@@ -1,82 +1,78 @@
-<h1><%= @wedding.name %></h1><br>
-<div>
+<div class="col-md-12 guest-view">
 
-  <div class="col-md-3 wedding-show center">
-    <h4 class="center">RSVP</h4>
-    <a href="#" class="rsvp">
-      <span class="glyphicon glyphicon-calendar"></span>
-    </a>
-  </div>
-
-  <div class="col-md-3 wedding-show">
-    <h4 class="center">Wedding Registry</h4>
-    <a href="#">
-      <span class="glyphicon glyphicon-gift"></span>
-    </a>
-  </div>
-
-  <div class="col-md-3 wedding-show">
-    <h4 class="center">Wedding Info</h4>
-  </div>
-
-
-</div><br>
-
-<div id='guest-list'>
-
-  <div class="col-md-4 guests">
-    <div class="search-form">
-      <%= render 'search_guest' %>
-    </div><br>
-    <hr>
-
-    <div id="all-guests">
-      <ul class="all-guests" style="list-style-type: none;">
-        <% @all_guests.each do |guest| %>
-          <li class="guest-name" id="<%= dom_id(guest)%>">
-            <%= guest.name %>
-          </li>
-        <% end %>
-      </ul>
+  <h1><%= @wedding.name %></h1><br>
+  <div>
+    <div class="col-md-3 wedding-show center">
+      <h4 class="center">RSVP</h4>
+      <a href="#" class="rsvp">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </a>
     </div>
 
+    <div class="col-md-3 wedding-show center">
+      <h4 class="center">Wedding Registry</h4>
+      <a href="#">
+        <span class="glyphicon glyphicon-gift"></span>
+      </a>
+    </div>
+
+    <div class="col-md-3 wedding-show center">
+      <h4 class="center">Wedding Info</h4>
+      <a href="#">
+        <span class="glyphicon glyphicon-list-alt"></span>
+      </a>
+    </div>
+
+
+  </div><br>
+
+  <div class="col-md-10 guests" id='guest-list'>
+      <div class="search-form">
+        <%= render 'search_guest' %>
+      </div><br>
+      <hr>
+
+      <div id="all-guests">
+        <ul class="all-guests" style="list-style-type: none;">
+          <% @all_guests.each do |guest| %>
+            <li class="guest-name" data-id="<%= guest.id%>">
+              <div class="col-md-6">
+                <h5>
+                  <%= guest.name %>
+                </h5>
+              </div>
+
+              <div class="col-md-6 text-right">
+                <button class="cant-make-it btn btn-danger ">I can't make it</button>
+                <button class="im-going btn btn-success">I'm going</button>
+              </div>
+
+
+            </li>
+          <% end %>
+        </ul>
+      </div>
   </div>
 
-  <div class="col-md-4 rsvp-true">
-    <h4>I'm Going! </h4>
-    <ul class="confirmed-guest" style="list-style-type: none;">
-    </ul>
-    <br>
-    <button type="submit" class="button-confirm pull-right">Confirm</button>
-  </div>
-
-  <div class="col-md-4 rsvp-false">
-    <h4>I can't make it! </h4>
-    <ul class="cant-make-it-guest" style="list-style-type: none;">
-    </ul>
-    <br>
-    <button type="submit" class="button-confirm pull-right">Confirm</button>
-  </div>
-
-</div>
-
-<div class="registry col-md-10">
-  <table class="table all-gifts" style="list-style-type: none;">
-    <tr>
-      <td>Item</td>
-      <td>Item Specification</td>
-      <td>Description</td>
-      <td>Available Quantity</td>
-      <td></td>
-    </tr>
-    <% @gifts.each do |gift|%>
-      <tr class="gift-name" id="<%= dom_id(gift)%>">
-        <td><%= gift.item %></td>
-        <td><a href="<%= gift.link %>">Product Example</a></td>
-        <td><%= gift.description %></td>
-        <td class="quantity"><%= gift.quantity %></td>
-        <td><button class="pick-gift">Pick One</button></td>
+  <div class="registry col-md-10">
+    <table class="table all-gifts" style="list-style-type: none;">
+      <tr>
+        <td>Item</td>
+        <td>Item Specification</td>
+        <td>Description</td>
+        <td>Available Quantity</td>
+        <td></td>
       </tr>
-    <%end%>
-  </table>
+      <% @gifts.each do |gift|%>
+        <tr class="gift-name" id="<%= dom_id(gift)%>">
+          <td><%= gift.item %></td>
+          <td><a href="<%= gift.link %>">Product Example</a></td>
+          <td><%= gift.description %></td>
+          <td class="quantity"><%= gift.quantity %></td>
+          <td><button class="pick-gift">Pick One</button></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
+
 </div>
