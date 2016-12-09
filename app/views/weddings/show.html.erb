@@ -24,21 +24,17 @@
 
 <div id='guest-list'>
 
-  <div class="col-md-5 guests">
+  <div class="col-md-4 guests">
     <div class="search-form">
       <%= render 'search_guest' %>
     </div><br>
     <hr>
 
-    <div>
+    <div id="all-guests">
       <ul class="all-guests" style="list-style-type: none;">
         <% @all_guests.each do |guest| %>
           <li class="guest-name" id="<%= dom_id(guest)%>">
             <%= guest.name %>
-            <a>
-              <span class="glyphicon glyphicon-arrow-right pull-right confirm"></span>
-            </a>
-            <hr>
           </li>
         <% end %>
       </ul>
@@ -46,9 +42,17 @@
 
   </div>
 
-  <div class="col-md-5 rsvp-true">
-    <h4>Confirmed Guests: </h4>
+  <div class="col-md-4 rsvp-true">
+    <h4>I'm Going! </h4>
     <ul class="confirmed-guest" style="list-style-type: none;">
+    </ul>
+    <br>
+    <button type="submit" class="button-confirm pull-right">Confirm</button>
+  </div>
+
+  <div class="col-md-4 rsvp-false">
+    <h4>I can't make it! </h4>
+    <ul class="cant-make-it-guest" style="list-style-type: none;">
     </ul>
     <br>
     <button type="submit" class="button-confirm pull-right">Confirm</button>

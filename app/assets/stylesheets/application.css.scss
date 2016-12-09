@@ -17,6 +17,7 @@
  @import "bootstrap";
  @import "font-awesome";
  @import "hopscotch";
+ @import "jquery-ui";
 
 body {
  background-image: url('background4.png');
@@ -89,6 +90,16 @@ span.search {
   height: 300px;
   overflow: scroll;
 }
+.guest-name {
+  margin-bottom: 5px;
+  background-color: none;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  padding: 10px 16px;
+  cursor: pointer;
+  width: 500px
+}
 .registry {
   border: 1px solid black;
   border-radius: 5px;
@@ -97,6 +108,14 @@ span.search {
   overflow: scroll;
 }
 .rsvp-true {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  height: 300px;
+  // overflow: scroll;
+}
+.rsvp-false {
+  background-color: rgba(255, 0, 0, 0.3);
   border: 1px solid black;
   border-radius: 5px;
   margin: 5px;

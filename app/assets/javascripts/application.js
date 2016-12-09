@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require chosen-jquery
 //= require jquery.purr
+//= require jquery-ui
 //= require best_in_place
 //= require bootstrap-sprockets
 //= require hopscotch
@@ -22,10 +23,11 @@
 $(function() {
   $('.chosen-select').chosen({width: '150px'});
 
-  $('.guests').on('click', '.confirm', function(event) {
-    var guest = $(event.target).parents('.guest-name');
-    guest.fadeOut(800)
-    $('.confirmed-guest').append(guest[0].outerHTML);
+  $('#all-guests').on('click', '.guest-name', function(event) {
+    var guest = $(event.target);
+    event.preventDefault;
+    guest.draggable()
+    $('.rsvp-true').droppable();
   })
 
   var DOMAIN = "http://localhost:3000"
