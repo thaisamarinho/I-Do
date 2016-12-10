@@ -43,11 +43,9 @@
               </div>
 
               <div class="col-md-6 text-right">
-                <button class="cant-make-it btn btn-danger ">I can't make it</button>
-                <button class="im-going btn btn-success">I'm going</button>
+                <button class="cant-make-it btn btn-danger <%= 'active' unless guest.rsvp == nil || guest.rsvp == true %>">I can't make it</button>
+                <button class="im-going btn btn-success <%= 'active' if guest.rsvp == true %>">I'm going</button>
               </div>
-
-
             </li>
           <% end %>
         </ul>
@@ -69,7 +67,7 @@
           <td><a href="<%= gift.link %>">Product Example</a></td>
           <td><%= gift.description %></td>
           <td class="quantity"><%= gift.quantity %></td>
-          <td><button class="pick-gift">Pick One</button></td>
+          <td><button class="pick-gift btn btn-default">Pick One</button></td>
         </tr>
       <%end%>
     </table>

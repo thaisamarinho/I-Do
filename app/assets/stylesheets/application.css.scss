@@ -25,13 +25,9 @@ body {
  font-family: 'Raleway', sans-serif;
  padding: 0;
  background-repeat: repeat;
- /*background-size: 100%;*/
 }
 .background {
   background: rgba(255, 255, 255, 0.3);
-  // height: 100vw;
-  // width: 100hw;
-  // font-size: 20px;
 }
 .jumbotron-lua {
   background-image:url('lua.jpg');
@@ -80,7 +76,7 @@ span.search {
   border-radius: 5px;
   margin: 5px;
   height: 200px;
-  width: 300px;
+  width: 310px;
 }
 .wedding-show h4 {
   margin: 20px 0;
@@ -176,16 +172,16 @@ div.hopscotch-bubble .hopscotch-bubble-number, .hopscotch-bubble-close {
   opacity: 0.3;
 }
 
-#all-guests{
+.all-guests{
   button{
-    opacity: 0.70;
-    filter: alpha(opacity =70);
+    opacity: 0.60;
+    filter: alpha(opacity =60);
     &:hover{
       opacity: 1;
     }
   }
 }
-.active{
+.guest-name .active{
   opacity: 1;
 }
 

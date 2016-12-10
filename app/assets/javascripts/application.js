@@ -26,9 +26,10 @@ $(function() {
          type: 'patch',
          data: {guest: {rsvp: true}},
          success: function(){
-           console.log($('button .im-going'));
-           $('button .im-going').addClass('.active');
-         },
+           console.log('Yay!');
+           $(this).addClass('active')
+           $(this).siblings().removeClass('active')
+         }.bind(this),
          error: function() {
            alert(`Could not rsvp guest, please try again...`)
          }
@@ -42,9 +43,10 @@ $(function() {
          type: 'patch',
          data: {guest: {rsvp: false}},
          success: function(){
-           console.log($('button .im-going'));
-           $('button .cant-make-it').addClass('.active');
-         },
+          console.log('Yay!');
+          $(this).addClass('active')
+          $(this).siblings().removeClass('active')
+        }.bind(this),
          error: function() {
            alert(`Could not rsvp guest, please try again...`)
          }

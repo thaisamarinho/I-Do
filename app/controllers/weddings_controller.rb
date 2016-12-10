@@ -28,7 +28,7 @@ class WeddingsController < ApplicationController
     wedding = Wedding.new wedding_params
     wedding.owner = current_user
     if wedding.save
-      redirect_to home_path
+      redirect_to wedding_details_path(wedding)
     else
       render :new
     end
@@ -38,6 +38,7 @@ class WeddingsController < ApplicationController
     @wedding.update_attributes(wedding_params)
     respond_to do |format|
       format.json { render json: 'Alert("deleted!")' }
+      format.html { render :show_admin}
     end
   end
 
@@ -65,9 +66,11 @@ class WeddingsController < ApplicationController
     params.require(:wedding).permit([:name,
                                      :budget,
                                      :date,
+                                     :story,
                                      :owner_id,
                                      {images: []},
-                                     :role])
+                                     :role
+                                     ])
   end
 
   def find_wedding
