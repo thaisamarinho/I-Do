@@ -18,10 +18,19 @@
       <% @wedding.each do |w| %>
         <div class="col-md-4 wedding-box">
           <% if w.owner == current_user %> <!--CanCanCan here -->
-            <%= image_tag 'abraco.jpg', class: 'wedding-pic-show' %><br>
+
+            <% if w.images.present?%>
+            <%= image_tag w.images[0].url, class: 'wedding-pic-show' %><br>
+            <% else %>
+            <%= image_tag 'background.jpg', class: 'wedding-pic-show' %><br>
+            <% end %>
             <a href="weddings/<%= w.id %>/weddings/show_admin"><%= w.name %></a>
           <% else %>
-            <%= image_tag 'abraco.jpg', class: 'wedding-pic-show' %><br>
+            <% if w.images.present?%>
+            <%= image_tag w.images[0].url, class: 'wedding-pic-show' %><br>
+            <% else %>
+            <%= image_tag 'background.jpg', class: 'wedding-pic-show' %><br>
+            <% end %>
             <a href="weddings/<%= w.id %>"><%= w.name %></a>
           <% end %>
         </div>

@@ -7,6 +7,9 @@ class Wedding < ApplicationRecord
   has_many :users, through: :admins
   has_many :admins, dependent: :destroy
 
+  mount_uploaders :images, ImageUploader
+  attr_accessor :images_cache
+
   validates :name, presence: true
   validates :budget, presence: true
 

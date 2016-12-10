@@ -1,25 +1,52 @@
+<div class="col-md-12">
 
-<div>
-<%= render 'shared/wedding_nav', {wedding: @wedding} %>
-</div><br>
+  <div>
+  <%= render 'shared/wedding_nav', {wedding: @wedding} %>
+  </div>
 
-<h1><%= @wedding.name %></h1>
-<div class="col-md-3 wedding-show">
-  <div class="pull-right">
-    <%= link_to edit_wedding_path(@wedding) do %>
-      <span class="glyphicon glyphicon-pencil"></span>
-    <% end %>
-    <%= link_to wedding_path(@wedding), method: :delete do %>
-      <span class="glyphicon glyphicon-trash"></span>
+  <h1><%= @wedding.name %></h1>
+
+
+  <div class="col-md-12 wedding_info">
+    <div class="pull-right">
+
+      <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+
+      <%= link_to wedding_path(@wedding), method: :delete do %>
+        <span class="glyphicon glyphicon-trash"></span>
+      <%end%>
+    </div>
+    <p>
+      Name: <h4><strong><%= best_in_place @wedding, :name %></strong></h4>
+      Budget($): <h4><strong><%= best_in_place @wedding, :budget %></strong></h4>
+      Date: <h4><strong><%= best_in_place @wedding, :date %></strong></h4>
+      Admins:
+      <%if @admin %>
+        <ul>
+          <% @admin.each do |a| %>
+            <% if a.user != current_user %>
+              <li><%= a.email %>
+                <%= link_to admin_path(a), method: :delete do %>
+                  <span class="glyphicon glyphicon-trash"></span>
+                <%end%>
+              </li>
+            <%end%>
+          <% end %>
+        </ul>
+      <% end %>
+    </p>
+    <%= form_for @wedding, url: wedding_path(@wedding), method: 'patch' do |f|%>
+      <%= f.label 'Tell us your love story'%>
+      <%= f.text_area :story %>
+      <%= f.file_field :images, multiple: :true %>
+      <%= f.hidden_field :images_cache %><br>
+      <%= f.submit "Update", class: 'btn btn-default'%>
     <%end%>
   </div>
-  <p>
-    Name: <h4><strong><%= best_in_place @wedding, :name %></strong></h4>
-    Budget($): <h4><strong><%= best_in_place @wedding, :budget %></strong></h4>
-    Date: <h4><strong><%= best_in_place @wedding, :date %></strong></h4>
-    Admins:
-    <% @admin.each do |a| %>
-      <p><%= a.email %></p>
+  <div class="col-md-12 wedding-pic-info">
+    <% if @wedding.images.present? %>
+    <%= image_tag @wedding.images[0].url(:large) %>
     <% end %>
-  </p>
+  </div>
+    <%= @wedding.story %>
 </div>

@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>I Do</title>
+    <meta name='viewport' content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -13,57 +14,20 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <span class="navbar-brand">I do</span>
-          <span class="glyphicon glyphicon-heart navbar-brand" aria-hidden="true"></span>
-        </div>
-
-        <div class="navbar-collapse collapse" id="ido-navbar">
-          <ul class="nav navbar-nav">
-            <li><%= link_to 'Home', home_path %></li>
-            <% if user_signed_in?%>
-              <li><%= link_to 'New Wedding', new_wedding_path %></li>
-                <%if current_user.weddings.present? %>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Weddings
-                    <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <% current_user.weddings.each do |wedding|%>
-                            <li><%=link_to wedding.name, wedding_details_path(wedding)%></li>
-                      <%end%>
-                    </ul>
-                  </li>
-                </ul>
-              <% end %>
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                    <p class="navbar-text">Hello <%=current_user.first_name%></p>
-                  </li>
-                  <li><%= button_to 'Sign Out', sessions_path, method: :delete, class: 'btn btn-default navbar-btn' %></li>
-                </ul>
-            <% else %>
-              <ul class="nav navbar-nav navbar-right">
-                <li><%= link_to 'Sign up', new_user_path %></li>
-                <li><%= link_to 'Sign in', new_session_path %></li>
-              </ul>
-            <% end %>
-        </div>
-      </div>
-    </nav>
-    <div class="background container-fluid">
+    <%= render 'shared/navbar' %>
+    <main class="container">
       <% if notice || alert %>
-        <div class="alert alert-<%= notice ? 'success' : 'danger'%> alert-dismissable" role="alert">
+        <div class="alert alert-<%= notice ? 'success' : 'danger'%> alert-dismissable"
+             role="alert">
           <%= notice || alert %>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
       <% end %>
-      <div class="container-fluid">
+      <div class="row background">
         <%= yield %>
       </div>
-    </div>
+    </main>
   </body>
 </html>
