@@ -11,11 +11,6 @@
 $(function() {
   $('.chosen-select').chosen({width: '150px'});
 
-
-
-
-
-
   var DOMAIN = "http://localhost:3000"
 
   $('.guest-name').on('click', '.im-going',function(event) {
@@ -103,4 +98,20 @@ $(function() {
   $('table').on('click', '#glyphicon-pencil-service', function(){
     hopscotch.startTour(tourService);
   })
+
+  $('.update-form').hide();
+  $('.update-form-btn').click(function(){
+    $('.update-form').slideDown();
+  })
+  $('.guests').hide();
+  $('.rsvp').click(function(){
+    $('.registry').slideUp();
+    $('.guests').slideDown();
+  })
+  $('.registry').hide();
+  $('.gift').click(function(){
+    $('.guests').slideUp();
+    $('.registry').slideDown();
+  })
+
 });

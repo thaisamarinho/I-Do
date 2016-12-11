@@ -37,7 +37,7 @@ class WeddingsController < ApplicationController
   def update
     @wedding.update_attributes(wedding_params)
     respond_to do |format|
-      format.json { render json: 'Alert("deleted!")' }
+      format.json { render json: :show_admin }
       format.html { render :show_admin}
     end
   end

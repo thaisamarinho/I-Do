@@ -1,0 +1,18 @@
+<table class="table all-gifts" style="list-style-type: none;">
+  <tr>
+    <td>Item</td>
+    <td>Item Specification</td>
+    <td>Description</td>
+    <td>Available Quantity</td>
+    <td></td>
+  </tr>
+  <% gifts.each do |gift|%>
+    <tr class="gift-name" id="<%= dom_id(gift)%>">
+      <td><%= gift.item %></td>
+      <td><a href="<%= gift.link %>">Product Example</a></td>
+      <td><%= gift.description %></td>
+      <td class="quantity"><%= gift.quantity %></td>
+      <td><button class="pick-gift btn btn-default">Pick One</button></td>
+    </tr>
+  <%end%>
+</table>
