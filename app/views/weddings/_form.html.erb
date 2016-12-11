@@ -1,30 +1,26 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
+<div class="col-md-8 col-md-offset-2">
+  <%= form_for @wedding do |w| %>
+    <div class="form-group">
+      <%= w.label :name %>
+      <%= w.text_field :name, class: "form-control", placeholder: 'ex: Joane&John' %>
+    </div>
+    <div class="form-group">
+      <%= w.label :budget %>($)
+      <%= w.text_field :budget, class: "form-control", placeholder: 'Please enter just numbers. You can change this later if you need to.' %>
+    </div>
+    <div class="form-group">
+      <%= w.label :wedding_date %>
+      <%= w.date_field :date, class: "form-control" %>
+    </div>
 
-    <%= form_for @wedding do |w| %>
-      <div class="form-group">
-        <%= w.label :name %>
-        <%= w.text_field :name, class: "form-control", placeholder: 'ex: Joane&John' %>
-      </div>
-      <div class="form-group">
-        <%= w.label :budget %>($)
-        <%= w.text_field :budget, class: "form-control", placeholder: 'Please enter just numbers. You can change this later if you need to.' %>
-      </div>
-      <div class="form-group">
-        <%= w.label :wedding_date %>
-        <%= w.date_field :date, class: "form-control" %>
-      </div>
+    <div class="form-group">
+      <%= image_tag(w.images[0].url(:thumb)) if params[:images] != nil %>
+      <%= w.file_field :images, multiple: :true %>
+      <%= w.hidden_field :images_cache %>
+    </div>
 
-      <div class="form-group">
-        <%= image_tag(w.images[0].url(:thumb)) if params[:images] != nil %>
-        <%= w.file_field :images, multiple: :true %>
-        <%= w.hidden_field :images_cache %>
-      </div>
-
-      <div class="modal-footer">
-        <%= w.submit 'Create Wedding', class: "btn btn-primary btn-block"%>
-      </div>
+    <div class="modal-footer">
+      <%= w.submit 'Create Wedding', class: "btn btn-primary btn-block"%>
+    </div>
   <% end %>
 </div>
-
-<div class="col-md-1">

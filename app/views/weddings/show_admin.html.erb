@@ -1,7 +1,7 @@
 <div class="col-md-12">
 
   <div>
-  <%= render 'shared/wedding_nav', {wedding: @wedding} %>
+  <%= render 'partials/wedding_nav', {wedding: @wedding} %>
   </div>
 
   <h1><%= @wedding.name %></h1>
@@ -35,18 +35,16 @@
         </ul>
       <% end %>
     </p>
-    <%= form_for @wedding, url: wedding_path(@wedding), method: 'patch' do |f|%>
-      <%= f.label 'Tell us your love story'%>
-      <%= f.text_area :story %>
-      <%= f.file_field :images, multiple: :true %>
-      <%= f.hidden_field :images_cache %><br>
-      <%= f.submit "Update", class: 'btn btn-default'%>
-    <%end%>
+
+    <button type="button" name="button" class="update-form-btn btn btn-default">Update the Form</button>
+    <div class="update-form">
+      <%= render 'update_form', {wedding: @wedding} %>
+    </div>
   </div>
   <div class="col-md-12 wedding-pic-info">
     <% if @wedding.images.present? %>
-    <%= image_tag @wedding.images[0].url(:large) %>
+    <%= image_tag @wedding.images[0].url(:large), class: 'pic' %>
     <% end %>
-  </div>
     <%= @wedding.story %>
+  </div>
 </div>
