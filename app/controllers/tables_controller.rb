@@ -15,7 +15,7 @@ class TablesController < ApplicationController
     @all_guests = Guest.order(:name)
     @guests = Guest.search(params[:search]).display_guest(@wedding) if params[:search]
     @table = Table.new
-    @tables = Table.order(:name)
+    @tables = Table.all
   end
 
   private

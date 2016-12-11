@@ -1,6 +1,6 @@
 <div class="col-md-12">
 
-  <div >
+  <div>
   <%= render 'partials/wedding_nav', {wedding: @wedding} %>
   </div><br>
   <div class="col-md-12 form-table">
@@ -18,10 +18,9 @@
   </div>
 
   <div class="col-md-5 guests-table">
-    <% @table.name %>
+      <h4><% @table.name %></h4>
+      <ul class="table-<%= @table.id %>">
+      </ul>
   </div>
-
-
-
 
 </div>
