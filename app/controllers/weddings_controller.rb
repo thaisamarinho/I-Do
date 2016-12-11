@@ -9,7 +9,7 @@ class WeddingsController < ApplicationController
 
   def show
     @all_guests = Guest.order(:name)
-    @guests = Guest.search(params[:search]).display_guest(@wedding) if params[:search]
+    @guests = Guest.search(params[:search]) if params[:search]
 
     @gifts = Gift.all
 

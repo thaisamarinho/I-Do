@@ -2,10 +2,6 @@
   <% @guests.each do |guest| %>
     <li class="guest-name" id="<%= dom_id(guest)%>">
       <%= guest.name %>
-      <a>
-        <span class="glyphicon glyphicon-arrow-right pull-right confirm"></span>
-      </a>
-      <hr>
     </li>
   <%end%>
 <%else%>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get 'tags/:tag_id' => 'tags#show', as: :tag
     resources :admins
     resources :guests
+    resources :tables
     resources :gifts
     resources :services do
       resources :notes

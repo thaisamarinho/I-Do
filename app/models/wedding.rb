@@ -4,8 +4,9 @@ class Wedding < ApplicationRecord
   has_many :guests, dependent: :destroy
   has_many :admins, dependent: :destroy
   has_many :services, dependent: :destroy
+  has_many :table, dependent: :destroy
+  
   has_many :users, through: :admins
-  has_many :admins, dependent: :destroy
 
   mount_uploaders :images, ImageUploader
   attr_accessor :images_cache

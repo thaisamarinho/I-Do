@@ -1,5 +1,6 @@
 class Guest < ApplicationRecord
   belongs_to :wedding
+  belongs_to :table
 
   validates :name, presence: true, uniqueness: true
 

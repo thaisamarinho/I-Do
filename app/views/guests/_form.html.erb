@@ -1,8 +1,6 @@
-<% if @guest.errors.messages.present? %>
-  <%=  @guest.errors.messages.values.join(", ")%>
-  <%else%>
+<% if @guest.errors.present? %>
   <%=  @guest.errors.full_messages.join(", ")%>
-  <%end%>
+<%end%>
 <div class="form-inline">
   <%= form_for  @guest, url: wedding_guests_path(@wedding) do |g| %>
     <div class="form-group">

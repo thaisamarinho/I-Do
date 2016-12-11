@@ -1,0 +1,26 @@
+<div class="col-md-12">
+
+  <div>
+  <%= render 'partials/wedding_nav', {wedding: @wedding} %>
+  </div><br>
+  <div class="col-md-12 form-table">
+    <%= render 'form', {btn_label: 'Add Table'} %>
+  </div><br>
+
+  <div class="col-md-12">
+    <h1 class="title">Table Arrangements</h1>
+    <h1 class=" title"># of Tables: <%= Table.all.count %></h1>
+  </div>
+  <br><br><br><br><br><br><br><br><br>
+
+  <div class="col-md-6 guests-table">
+    <%= render 'partials/guest_table', {all_guests: @all_guests} %>
+  </div>
+
+  <div class="col-md-5 guests-table">
+      <h4><% @table.name %></h4>
+      <ul class="table-<%= @table.id %>">
+      </ul>
+  </div>
+
+</div>
