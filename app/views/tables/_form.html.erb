@@ -1,0 +1,12 @@
+<% if @table.errors.present? %>
+  <%=  @table.errors.full_messages.join(", ")%>
+<%end%>
+<div class="form-inline">
+  <%= form_for  @table, url: wedding_tables_path(@wedding) do |g| %>
+    <div class="form-group">
+      <%= g.label "Table Name" %>
+      <%= g.text_field :name, placeholder: 'Table 1, School Friends...', size: '25' %>&nbsp;&nbsp;
+    </div>
+  <%= g.submit btn_label, class: 'btn btn-default' %>
+  <% end %>
+</div>
