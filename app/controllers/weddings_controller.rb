@@ -18,7 +18,7 @@ class WeddingsController < ApplicationController
         format.html { render :show }
         format.js { render :searched_guest }
       else
-        format.html {render :show, alert: 'danger'}
+        format.html { render :show, alert: 'danger' }
         format.js { render js: 'alert("danger!")' }
       end
     end
@@ -38,7 +38,7 @@ class WeddingsController < ApplicationController
     @wedding.update_attributes(wedding_params)
     respond_to do |format|
       format.json { render json: :show_admin }
-      format.html { render :show_admin}
+      format.html { render :show_admin }
     end
   end
 
@@ -68,13 +68,11 @@ class WeddingsController < ApplicationController
                                      :date,
                                      :story,
                                      :owner_id,
-                                     {images: []},
-                                     :role
-                                     ])
+                                     { images: [] },
+                                     :role])
   end
 
   def find_wedding
     @wedding = Wedding.find params[:id]
   end
-
 end

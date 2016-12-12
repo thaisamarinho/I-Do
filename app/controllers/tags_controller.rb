@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-
   def index
     @tags = Tag.all
   end
@@ -11,10 +10,7 @@ class TagsController < ApplicationController
     permitted_tag = @tag.taggings
     @taggings = []
     service.each do |s|
-      if permitted_tag.include? s.taggings[0]
-        @taggings.push(s.taggings[0])
-      end
+      @taggings.push(s.taggings[0]) if permitted_tag.include? s.taggings[0]
     end
   end
-
 end

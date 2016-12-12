@@ -28,23 +28,22 @@ class AdminsController < ApplicationController
 
   def update
     if params[:wedding].present?
-      @admin = Admin.find_by( wedding: params[:wedding],
-                              token: params[:token] )
-        if @admin
-          @user = User.find_by(email: params[:email])
-          if @user
-            @admin.user = @user
-            @admin.wedding = params[:wedding]
-            @admin.save
-            redirect_to home_path
-          else
-            redirect_to new_user_path
-          end
+      @admin = Admin.find_by(wedding: params[:wedding],
+                             token: params[:token])
+      if @admin
+        @user = User.find_by(email: params[:email])
+        if @user
+          @admin.user = @user
+          @admin.wedding = params[:wedding]
+          @admin.save
+          redirect_to home_path
         else
-          redirect_to home_path, alert: 'Wrong Credentials'
+          redirect_to new_user_path
         end
+      else
+        redirect_to home_path, alert: 'Wrong Credentials'
+      end
     end
-
   end
 
   def show

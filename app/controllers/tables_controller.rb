@@ -7,7 +7,7 @@ class TablesController < ApplicationController
     if @table.save
       redirect_to wedding_tables_path(@wedding)
     else
-      render ('weddings/show_admin'), alert: 'Could not save table'
+      render 'weddings/show_admin', alert: 'Could not save table'
     end
   end
 
@@ -21,7 +21,7 @@ class TablesController < ApplicationController
         format.html { render :index }
         format.js { render :searched_guest_table }
       else
-        format.html {render :index, alert: 'danger'}
+        format.html { render :index, alert: 'danger' }
         format.js { render js: 'alert("danger!")' }
       end
     end

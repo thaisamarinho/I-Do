@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use postgresql as the database for Active Record
@@ -62,11 +61,12 @@ gem 'font-awesome-rails'
 gem 'chosen-rails'
 gem 'simple_form'
 gem 'best_in_place'
-gem "responders"
+gem 'responders'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'hopscotch-rails'
 gem 'jquery-ui-rails'
+gem 'rubocop'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

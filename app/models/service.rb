@@ -6,12 +6,12 @@ class Service < ApplicationRecord
 
   has_many :notes, dependent: :destroy
 
-  scope :display_chosen, -> (wedding) {
+  scope :display_chosen, ->(wedding) {
     where(chosen: true, wedding_id: wedding).order(:vendor)
   }
 
   def self.total_price
-    where(chosen: true).map{|p| p.price}.sum
+    where(chosen: true).map(&:price).sum
   end
 
   def status
@@ -20,10 +20,9 @@ class Service < ApplicationRecord
 
   def status_display_color
     if status >= 0
-      return 'color: green;'
+      'color: green;'
     else
-      return 'color: red;'
+      'color: red;'
     end
   end
-
 end

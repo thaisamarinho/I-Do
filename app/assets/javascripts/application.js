@@ -49,11 +49,12 @@ $(function() {
        })
   })
 
-  $('.pick-gift').on('click', function(event){
-    var giftId = parseInt(($(this).parents('tr').attr('id')).split("_")[1])
-    var quantityAfter = parseInt($(this).parents('td').siblings('.quantity').html()) - 1
+  $('.pick-gift').on('click', function(){
+    var giftId = $(this).parents('tr').data('id')
+    var quantityAfter = parseInt(
+      $(this).parents('td').siblings('.quantity').html()
+    ) - 1
     var quantityBefore = $(this).parents('td').siblings('.quantity')
-
     $.ajax({
       url: `${DOMAIN}/gifts/${giftId}.js`,
       type: 'patch',
@@ -79,7 +80,7 @@ $(function() {
       $.ajax({
         url: `${DOMAIN}/guests/${guestId}.js`,
         type: 'patch',
-        data: {guest: {table_id: `${tableId}`}},
+        data: {guest: {table_id: tableId}},
         success: function(){
          console.log('Yay!');
        }.bind(this),

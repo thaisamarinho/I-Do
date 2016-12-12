@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def new
     if params[:wedding].present?
       @wedding = params[:wedding]
@@ -32,5 +31,4 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to home_path
   end
-
 end

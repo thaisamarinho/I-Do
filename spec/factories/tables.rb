@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :table do
-    name "MyString"
+    name 'MyString'
     guest nil
   end
 end
