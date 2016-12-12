@@ -83,14 +83,13 @@ $(function() {
         data: {guest: {table_id: tableId}},
         success: function(){
          console.log('Yay!');
-       }.bind(this),
+       },
         error: function() {
+          console.log('inside error');
           alert(`Could not save guests on this table, please try again...`)
         }
       })
     })
-
-
   });
 
   var tourGuest = {
