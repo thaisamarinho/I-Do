@@ -58,7 +58,7 @@ $(function() {
     $.ajax({
       url: `${DOMAIN}/gifts/${giftId}.js`,
       type: 'patch',
-      data: {gift: {quantity: quantityAfter}},
+      data: {gift: {available_quantity: quantityAfter}},
       success: function(){
         quantityBefore.html(quantityAfter);
       },
