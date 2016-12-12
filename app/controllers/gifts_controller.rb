@@ -10,6 +10,7 @@ class GiftsController < ApplicationController
   def create
     @gift = Gift.new gift_params
     @gift.wedding = @wedding
+    @gift.available_quantity = @gift.quantity
     if @gift.save
       redirect_to wedding_gifts_path(@wedding)
     else
@@ -27,14 +28,15 @@ class GiftsController < ApplicationController
       respond_with @gift
     else
       respond_to do |format|
-        if @gift.quantity > 0
-          if @gift.update_attributes(gift_params)
-            format.html { redirect_to wedding_path(@gift.wedding) }
-            format.js { render js: 'alert("Your presence in our Wedding is the biggest gift you can give to us. Thank You")' }
-          else
-            format.html { redirect_to :back, alert: 'Could not pick this gift' }
-            format.js { render js: 'alert("Could not pick this gift")' }
-          end
+        if @gift.update_attributes(gift_params)
+          format.html { redirect_to wedding_path(@gift.wedding) }
+          format.js { render js: 'alert(
+            "Your presence in our Wedding is the biggest gift you can give to us. Thank You"
+            )' }
+        else
+          format.html { redirect_to :back,
+                        alert: 'Could not pick this gift' }
+          format.js { render js: 'alert("Could not pick this gift")' }
         end
       end
     end
@@ -62,6 +64,7 @@ class GiftsController < ApplicationController
                                   :description,
                                   :quantity,
                                   :link,
+                                  :available_quantity,
                                   { image: [] }])
   end
 end

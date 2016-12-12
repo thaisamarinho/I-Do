@@ -11,8 +11,12 @@
       <td><%= gift.item %></td>
       <td><a href="<%= gift.link %>">Product Example</a></td>
       <td><%= gift.description %></td>
-      <td class="quantity"><%= gift.quantity %></td>
-      <td><button class="pick-gift btn btn-default">Pick One</button></td>
+      <td class="quantity"><%= gift.available_quantity %></td>
+      <td>
+        <button class="pick-gift btn btn-default">
+          Pick One
+        </button>
+      </td>
     </tr>
   <%end%>
 </table>
