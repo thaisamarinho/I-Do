@@ -1,0 +1,18 @@
+<% if @guests.present?%>
+  <% @guests.each do |guest| %>
+    <li class="guest-name" data-id="<%= guest.id%>">
+      <div class="col-md-6">
+        <h5>
+          <%= guest.name %>
+        </h5>
+      </div>
+
+      <div class="col-md-6 text-right">
+        <button class="cant-make-it btn btn-danger <%= 'active' unless guest.rsvp == nil || guest.rsvp == true %>">I can't make it</button>
+        <button class="im-going btn btn-success <%= 'active' if guest.rsvp == true %>">I'm going</button>
+      </div>
+    </li>
+  <%end%>
+<%else%>
+    <p>There is no Guest containing the term(s):  <%= params[:search] %>.</p>
+<% end %>

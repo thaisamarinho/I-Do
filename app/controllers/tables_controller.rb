@@ -12,10 +12,19 @@ class TablesController < ApplicationController
   end
 
   def index
-    @all_guests = Guest.order(:name)
-    @guests = Guest.search(params[:search]).display_guest(@wedding) if params[:search]
     @table = Table.new
     @tables = Table.all
+    @all_guests = Guest.order(:name)
+    @guests = Guest.search(params[:search]) if params[:search]
+    respond_to do |format|
+      if params[:search].present?
+        format.html { render :index }
+        format.js { render :searched_guest_table }
+      else
+        format.html {render :index, alert: 'danger'}
+        format.js { render js: 'alert("danger!")' }
+      end
+    end
   end
 
   private

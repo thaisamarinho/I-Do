@@ -13,15 +13,16 @@ $(function() {
 
   var DOMAIN = "http://localhost:3000"
 
-  $('.guest-name').on('click', '.im-going',function(event) {
+  $(document.body).on('click', '.im-going',function(event) {
     event.preventDefault();
+    console.log('Inside callback function after on click');
     var guestId = $(this).parents('li').data('id')
        $.ajax({
          url: `${DOMAIN}/guests/${guestId}.js`,
          type: 'patch',
          data: {guest: {rsvp: true}},
          success: function(){
-           console.log('Yay!');
+           console.log('Ajax request successful!');
            $(this).addClass('active')
            $(this).siblings().removeClass('active')
          }.bind(this),
@@ -30,7 +31,7 @@ $(function() {
          }
        })
   })
-  $('.guest-name').on('click', '.cant-make-it',function(event) {
+  $(document.body).on('click', '.cant-make-it',function(event) {
     event.preventDefault();
     var guestId = $(this).parents('li').data('id')
        $.ajax({
@@ -65,6 +66,31 @@ $(function() {
       }
     })
   })
+
+  $(document.body).on('click', '.add-guest',function(event) {
+    var guestId = $(this).parents('li').data('id');
+    var guest = $(this).parents('li');
+    console.log(guest);
+    console.log(guestId);
+    $('.table').append(guest);
+    $('.save-table').click(function(){
+      var tableId = $(this).siblings('ul').data('id')
+      console.log(tableId);
+      $.ajax({
+        url: `${DOMAIN}/guests/${guestId}.js`,
+        type: 'patch',
+        data: {guest: {table_id: `${tableId}`}},
+        success: function(){
+         console.log('Yay!');
+       }.bind(this),
+        error: function() {
+          alert(`Could not save guests on this table, please try again...`)
+        }
+      })
+    })
+
+
+  });
 
   var tourGuest = {
     id: "edit-info",

@@ -18,9 +18,10 @@
   </div>
 
   <div class="col-md-5 guests-table">
-      <h4><% @table.name %></h4>
-      <ul class="table-<%= @table.id %>">
+      <h4><%= @tables.last.name %></h4>
+      <ul class="table" data-id="<%= @tables.last.id%>">
       </ul>
+      <button type="button" name="button" class="save-table">Save Table</button>
   </div>
 
 </div>

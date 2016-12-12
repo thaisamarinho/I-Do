@@ -1,0 +1,17 @@
+<% if @guests.present?%>
+  <% @guests.each do |guest| %>
+  <li class="guest-name" data-id="<%= guest.id%>">
+    <div class="col-md-6">
+      <h5>
+        <%= guest.name %>
+      </h5>
+    </div>
+
+    <div class="col-md-6 text-right">
+      <button class="btn btn-default add-guest">Add to Table</button>
+    </div>
+  </li>
+  <%end%>
+<%else%>
+    <p>There is no Guest containing the term(s):  <%= params[:search] %>.</p>
+<% end %>

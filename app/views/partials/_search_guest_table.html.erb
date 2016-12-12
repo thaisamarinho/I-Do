@@ -1,0 +1,5 @@
+<%= form_tag wedding_tables_path(@wedding), method: "get",
+                                     id: "form-group",
+                                     remote: true do %>
+  <%= text_field_tag :search, params[:search] %>
+<% end %>

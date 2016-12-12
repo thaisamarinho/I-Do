@@ -1,15 +1,18 @@
 <div class="search-form">
-  <%= render 'weddings/search_guest' %>
+  <%= render 'partials/search_guest_table' %>
 </div><br>
 <hr>
 <div id="all-guests">
   <ul class="all-guests" style="list-style-type: none;">
     <% all_guests.each do |guest| %>
-      <li class="guest-name" data-id="<%= guest.id%>">
+      <li class="guest-name <%= 'table-true' if guest.table_id%>" data-id="<%= guest.id%>">
         <div class="col-md-6">
           <h5>
             <%= guest.name %>
           </h5>
+          <% if guest.table_id != nil%>
+            (table: <%= guest.table_id%>)
+          <% end %>
         </div>
 
         <div class="col-md-6 text-right">

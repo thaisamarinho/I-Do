@@ -32,8 +32,20 @@ class GuestsController < ApplicationController
 
   def update
     if current_user == @guest.wedding.owner
-      @guest.update_attributes(guest_params)
-      respond_with @guest
+      if params.dig(:guest,:table_id).present?
+        respond_to do |format|
+          if @guest.update_attributes(guest_params)
+            format.html { redirect_to wedding_tables_path(@guest.wedding)}
+            format.js {render js: 'alert("Table Saved)'}
+          else
+            format.html { redirect_to :back, alert: 'Could not save table' }
+            format.js {render js: 'alert("Could not save table")'}
+          end
+        end
+      else
+        @guest.update_attributes(guest_params)
+        respond_with @guest
+      end
     else
       respond_to do |format|
         if @guest.update_attributes(guest_params)
@@ -70,6 +82,6 @@ class GuestsController < ApplicationController
   end
 
   def guest_params
-    params.require(:guest).permit(:name, :rsvp, :plus_one, :table)
+    params.require(:guest).permit(:name, :rsvp, :plus_one, :table_id)
   end
 end
