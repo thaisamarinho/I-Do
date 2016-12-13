@@ -27,18 +27,7 @@ class GiftsController < ApplicationController
       @gift.update_attributes(gift_params)
       respond_with @gift
     else
-      respond_to do |format|
-        if @gift.update_attributes(gift_params)
-          format.html { redirect_to wedding_path(@gift.wedding) }
-          format.js { render js: 'alert(
-            "Your presence in our Wedding is the biggest gift you can give to us. Thank You"
-            )' }
-        else
-          format.html { redirect_to :back,
-                        alert: 'Could not pick this gift' }
-          format.js { render js: 'alert("Could not pick this gift")' }
-        end
-      end
+      pick_gift
     end
   end
 

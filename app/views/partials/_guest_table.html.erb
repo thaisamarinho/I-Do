@@ -11,7 +11,7 @@
             <%= guest.name %>
           </h5>
           <% if guest.table_id != nil%>
-            (table: <%= guest.table_id%>)
+            (<%= guest.table.name %>)
           <% end %>
         </div>
 

@@ -4,26 +4,33 @@ class TablesController < ApplicationController
   def create
     @table = Table.new table_params
     @table.wedding = @wedding
-    if @table.save
-      redirect_to wedding_tables_path(@wedding)
-    else
-      render 'weddings/show_admin', alert: 'Could not save table'
+    respond_to do |format|
+      if @table.save
+        format.html {redirect_to wedding_tables_path(@wedding)}
+        format.js { render :render_table }
+      else
+        render 'weddings/show_admin', alert: 'Could not save table'
+      end
     end
   end
 
   def index
     @table = Table.new
-    @tables = Table.all
+    @tables = Table.all.includes(:guests)
     @all_guests = Guest.order(:name)
     @guests = Guest.search(params[:search]) if params[:search]
     respond_to do |format|
+
       if params[:search].present?
         format.html { render :index }
+
         format.js { render :searched_guest_table }
       else
         format.html { render :index, alert: 'danger' }
+        format.json { render json: {tables: @tables.as_json(include: :guests) }}
         format.js { render js: 'alert("danger!")' }
       end
+
     end
   end
 

@@ -3,6 +3,8 @@
 //= require chosen-jquery
 //= require jquery.purr
 //= require jquery-ui
+//= require mustache
+//= require jquery.mustache
 //= require best_in_place
 //= require bootstrap-sprockets
 //= require hopscotch
@@ -12,6 +14,12 @@ $(function() {
   $('.chosen-select').chosen({width: '150px'});
 
   var DOMAIN = "http://localhost:3000"
+
+  var WEDID = $('wed').data('id')
+
+  if(WEDID){
+    getTables(WEDID);
+  }
 
   $(document.body).on('click', '.im-going',function(event) {
     event.preventDefault();
@@ -68,29 +76,57 @@ $(function() {
     })
   })
 
+  $('.table-arrangements').hide();
+  // $('.add-table').submit(function(e){
+  //   // e.preventDefault();
+  //   $('.table-arrangements').slideDown();
+  // });
+
   $(document.body).on('click', '.add-guest',function(event) {
     var guestId = $(this).parents('li').data('id');
     var guest = $(this).parents('li');
-    console.log(guest);
-    console.log(guestId);
     $('.table').append(guest);
     $('.save-table').click(function(){
       var tableId = $(this).siblings('ul').data('id')
       console.log(tableId);
       $.ajax({
-        url: `${DOMAIN}/guests/${guestId}.js`,
+        url: `${DOMAIN}/guests/${guestId}.json`,
         type: 'patch',
         data: {guest: {table_id: tableId}},
-        success: function(){
-         console.log('Yay!');
+        success: function(result){
+         console.info(result);
+         $('.table-arrangements').slideUp();
+         getTables(WEDID);
        },
-        error: function() {
-          console.log('inside error');
-          alert(`Could not save guests on this table, please try again...`)
+        error: function(err) {
+          console.error(err);
         }
       })
     })
   });
+
+  function getTables(wedding_id) {
+    $.ajax({
+      url: `${DOMAIN}/weddings/${wedding_id}/tables.json`,
+      success: function (json) {
+        console.table(json.tables);
+        renderTables(json.tables);
+      },
+      error: function () {
+        alert('Could not load tables, please try again...')
+      }
+    })
+  };
+
+  function renderTables(tables) {
+    var tableTemplate = $('#table-summary').html();
+    var tableList = $('.table-list');
+    Mustache.parse(tableTemplate);
+    var tablesHTML = tables.map(function (table) {
+        return Mustache.render(tableTemplate, table)
+      }).join('');
+    tableList.html(tablesHTML);
+  };
 
   var tourGuest = {
     id: "edit-info",

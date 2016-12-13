@@ -1,7 +1,7 @@
-<div class="col-md-12">
+<wed class="col-md-12" data-id = "<%= @wedding.id %>">
 
   <div>
-  <%= render 'partials/wedding_nav', {wedding: @wedding} %>
+    <%= render 'partials/wedding_nav', {wedding: @wedding} %>
   </div><br>
   <div class="col-md-12 form-table">
     <%= render 'form', {btn_label: 'Add Table'} %>
@@ -13,15 +13,60 @@
   </div>
   <br><br><br><br><br><br><br><br><br>
 
+<div class="col-md-12 table-arrangements">
   <div class="col-md-6 guests-table">
     <%= render 'partials/guest_table', {all_guests: @all_guests} %>
   </div>
 
-  <div class="col-md-5 guests-table">
-      <h4><%= @tables.last.name %></h4>
-      <ul class="table" data-id="<%= @tables.last.id%>">
-      </ul>
-      <button type="button" name="button" class="save-table">Save Table</button>
-  </div>
+  <div class="col-md-5 js-guest-table guests-table">
 
+
+
+  </div>
 </div>
+
+  <div class="col-md-12 all-tables">
+
+
+    <section class="tables-details" style="display:none"></section>
+
+    <ul class="table-list"></ul>
+
+
+    <script id="table-summary" type="x-tmpl-mustache">
+    {{#.}}
+    <li data-id={{id}}>
+      <h3>{{name}}</h3>
+      {{#guests}}
+       <p>{{name}}</p>
+      {{/guests}}
+    </li>
+    {{/.}}
+  </script>
+  </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</wed>
